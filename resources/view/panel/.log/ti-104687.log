@@ -1,0 +1,44 @@
+[01:12:42.894] Global cache location '/home/ali/.cache/typescript/4.7', safe file path '/home/ali/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/typingSafeList.json', types map path /home/ali/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/typesMap.json
+[01:12:42.895] Processing cache location '/home/ali/.cache/typescript/4.7'
+[01:12:42.895] Trying to find '/home/ali/.cache/typescript/4.7/package.json'...
+[01:12:42.899] Loaded content of '/home/ali/.cache/typescript/4.7/package.json': {"private":true,"dependencies":{"types-registry":"^0.1.594"},"devDependencies":{"@types/body-parser":"^1.19.2","@types/bootstrap":"^5.1.12","@types/express":"^4.17.13","@types/merge-descriptors":"^1.0.1","@types/react":"^18.0.9","@types/serve-static":"^1.13.10"}}
+[01:12:42.899] Loaded content of '/home/ali/.cache/typescript/4.7/package-lock.json'
+[01:12:42.924] Adding entry into typings cache: 'body-parser' => '/home/ali/.cache/typescript/4.7/node_modules/@types/body-parser/index.d.ts'
+[01:12:42.929] Adding entry into typings cache: 'bootstrap' => '/home/ali/.cache/typescript/4.7/node_modules/@types/bootstrap/index.d.ts'
+[01:12:42.935] Adding entry into typings cache: 'express' => '/home/ali/.cache/typescript/4.7/node_modules/@types/express/index.d.ts'
+[01:12:42.938] Adding entry into typings cache: 'merge-descriptors' => '/home/ali/.cache/typescript/4.7/node_modules/@types/merge-descriptors/index.d.ts'
+[01:12:42.944] Adding entry into typings cache: 'react' => '/home/ali/.cache/typescript/4.7/node_modules/@types/react/index.d.ts'
+[01:12:42.947] Adding entry into typings cache: 'serve-static' => '/home/ali/.cache/typescript/4.7/node_modules/@types/serve-static/index.d.ts'
+[01:12:42.947] Finished processing cache location '/home/ali/.cache/typescript/4.7'
+[01:12:42.948] Process id: 104721
+[01:12:42.948] NPM location: /usr/bin/npm (explicit '--npmLocation' not  provided)
+[01:12:42.948] validateDefaultNpmLocation: false
+[01:12:42.948] Npm config file: /home/ali/.cache/typescript/4.7/package.json
+[01:12:42.949] Updating types-registry npm package...
+[01:12:42.949] Exec: /usr/bin/npm install --ignore-scripts types-registry@latest
+[01:12:45.124]     Succeeded. stdout:
+    
+    up to date, audited 18 packages in 2s
+
+1 package is looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+[01:12:45.124] Updated types-registry npm package
+[01:12:45.188] Got install request {"projectName":"/dev/null/inferredProject1*","fileNames":["/home/ali/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.es5.d.ts","/home/ali/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.es2015.d.ts","/home/ali/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.es2016.d.ts","/home/ali/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.dom.d.ts","/home/ali/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.dom.iterable.d.ts","/home/ali/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.webworker.importscripts.d.ts","/home/ali/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.scripthost.d.ts","/home/ali/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.es2015.core.d.ts","/home/ali/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.es2015.collection.d.ts","/home/ali/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.es2015.generator.d.ts","/home/ali/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.es2015.iterable.d.ts","/home/ali/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.es2015.promise.d.ts","/home/ali/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.es2015.proxy.d.ts","/home/ali/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.es2015.reflect.d.ts","/home/ali/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.es2015.symbol.d.ts","/home/ali/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts","/home/ali/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.es2016.array.include.d.ts","/home/ali/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.es2016.full.d.ts","/home/ali/Project/Html_Css/alishahidinet/app/js/main.js"],"compilerOptions":{"module":1,"target":3,"jsx":1,"allowJs":true,"allowSyntheticDefaultImports":true,"allowNonTsExtensions":true,"noEmitForJsFiles":true,"maxNodeModuleJsDepth":2},"typeAcquisition":{"enable":true,"include":[],"exclude":[]},"unresolvedImports":[],"projectRootPath":"/home/ali/Project/Html_Css/alishahidinet/app/js","kind":"discover"}
+[01:12:45.205] Loaded safelist from types map file '/home/ali/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/typesMap.json'
+[01:12:45.205] Explicitly included types: []
+[01:12:45.206] Inferred typings from unresolved imports: []
+[01:12:45.206] Result: {"cachedTypingPaths":[],"newTypingNames":[],"filesToWatch":["/home/ali/Project/Html_Css/alishahidinet/app/js/bower_components","/home/ali/Project/Html_Css/alishahidinet/app/js/node_modules"]}
+[01:12:45.206] Finished typings discovery: {"cachedTypingPaths":[],"newTypingNames":[],"filesToWatch":["/home/ali/Project/Html_Css/alishahidinet/app/js/bower_components","/home/ali/Project/Html_Css/alishahidinet/app/js/node_modules"]}
+[01:12:45.207] DirectoryWatcher:: Added:: WatchInfo: /home/ali/Project/Html_Css/alishahidinet/app/js/bower_components
+[01:12:45.208] DirectoryWatcher:: Added:: WatchInfo: /home/ali/Project/Html_Css/alishahidinet/app/js/bower_components 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[01:12:45.211] Elapsed:: 2.6731349998153746ms DirectoryWatcher:: Added:: WatchInfo: /home/ali/Project/Html_Css/alishahidinet/app/js/bower_components 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[01:12:45.211] DirectoryWatcher:: Added:: WatchInfo: /home/ali/Project/Html_Css/alishahidinet/app/js/node_modules
+[01:12:45.211] DirectoryWatcher:: Added:: WatchInfo: /home/ali/Project/Html_Css/alishahidinet/app/js/node_modules 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[01:12:45.211] Elapsed:: 0.1701290002092719ms DirectoryWatcher:: Added:: WatchInfo: /home/ali/Project/Html_Css/alishahidinet/app/js/node_modules 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[01:12:45.211] Sending response:
+    {"projectName":"/dev/null/inferredProject1*","typeAcquisition":{"enable":true,"include":[],"exclude":[]},"compilerOptions":{"module":1,"target":3,"jsx":1,"allowJs":true,"allowSyntheticDefaultImports":true,"allowNonTsExtensions":true,"noEmitForJsFiles":true,"maxNodeModuleJsDepth":2},"typings":[],"unresolvedImports":[],"kind":"action::set"}
+[01:12:45.212] Response has been sent.
+[01:12:45.212] No new typings were requested as a result of typings discovery
