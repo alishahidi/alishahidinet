@@ -47,14 +47,14 @@ class ArticleController extends AdminController
         $tags = $this->getTagifyArray($inputs['tags']);
         unset($inputs['tags']);
         $inputs['image'] = [
-            'thumbnail' => Image::make("image", "images/article", true)->resize(360, 310)->text("alishahidinet.ir", x: 10, y: 10, size: 19)->saveFtp(quality: 90, unique: true, dateFormat: true),
-            'main' => Image::make("image", "images/article", true)->resize(530, 450)->text("alishahidinet.ir", x: 8, y: 10, size: 22)->saveFtp(quality: 90, unique: true, dateFormat: true)
+            'thumbnail' => Image::make('image', 'images/article', true)->resize(360, 310)->text('alishahidinet.ir', x: 10, y: 10, size: 19)->saveFtp(quality: 90, unique: true, dateFormat: true),
+            'main' => Image::make('image', 'images/article', true)->resize(530, 450)->text('alishahidinet.ir', x: 8, y: 10, size: 22)->saveFtp(quality: 90, unique: true, dateFormat: true),
         ];
         $inputs['view'] = 0;
         $article = Article::create($inputs);
         foreach ($tags as $tag) {
             $findTag = Tag::where('name', $tag)->get()[0];
-            if (!$findTag) {
+            if (! $findTag) {
                 Tag::create(['name' => $tag]);
             }
         }
@@ -86,11 +86,11 @@ class ArticleController extends AdminController
         $articleTags = $article->tags();
         $tags = $this->getTagifyArray($inputs['tags']);
         unset($inputs['tags']);
-        if ($request->file("image")["tmp_name"]) {
+        if ($request->file('image')['tmp_name']) {
             $inputs['image'] = [
-                'thumbnail' => Image::make("image", "images/article", true)->resize(360, 310)->text("alishahidinet.ir", x: 10, y: 10, size: 19)->saveFtp(quality: 90, unique: true, dateFormat: true),
-                'main' => Image::make("image", "images/article", true)->resize(530, 450)->text("alishahidinet.ir", x: 8, y: 10, size: 22)->saveFtp(quality: 90, unique: true, dateFormat: true)
-            ];;
+                'thumbnail' => Image::make('image', 'images/article', true)->resize(360, 310)->text('alishahidinet.ir', x: 10, y: 10, size: 19)->saveFtp(quality: 90, unique: true, dateFormat: true),
+                'main' => Image::make('image', 'images/article', true)->resize(530, 450)->text('alishahidinet.ir', x: 8, y: 10, size: 22)->saveFtp(quality: 90, unique: true, dateFormat: true),
+            ];
         }
         foreach ($articleTags as $articleTag) {
             if (in_array($articleTag->name, $tags)) {
@@ -101,12 +101,12 @@ class ArticleController extends AdminController
         }
         foreach ($tags as $tag) {
             $findTag = Tag::where('name', $tag)->get()[0];
-            if (!$findTag) {
+            if (! $findTag) {
                 Tag::create(['name' => $tag]);
             }
             $findTag = Tag::where('name', $tag)->get()[0];
             $findTagArticle = TagArticle::where('article_id', $id)->where('tag_id', $findTag->id)->get()[0];
-            if (!$findTagArticle) {
+            if (! $findTagArticle) {
                 TagArticle::create(['tag_id' => $findTag->id, 'article_id' => $id]);
             }
         }

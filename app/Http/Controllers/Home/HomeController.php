@@ -58,8 +58,9 @@ class HomeController extends Controller
     public function article($id, $slug)
     {
         $article = Article::find($id);
-        if(!$article)
+        if (! $article) {
             return error_404();
+        }
         $relatedArticles = Article::where('topic_id', $article->topic_id)->orderBy('created_at', 'DESC')->limit(0, 3)->get();
 
         return view('app.article', compact('article', 'relatedArticles'));
@@ -82,8 +83,9 @@ class HomeController extends Controller
     public function topic($id, $slug)
     {
         $topic = Topic::find($id);
-        if(!$topic)
+        if (! $topic) {
             return error_404();
+        }
         $articles = $topic->articles()->orderBy('created_at', 'DESC')->paginate(5);
         $articlesCount = Article::count();
         $title = $topic->name;
@@ -94,8 +96,9 @@ class HomeController extends Controller
     public function tag($id, $slug)
     {
         $tag = Tag::find($id);
-        if(!$tag)
+        if (! $tag) {
             return error_404();
+        }
         $articles = $tag->articles()->orderBy('created_at', 'DESC')->paginate(5);
         $articlesCount = Article::count();
         $title = $tag->name;

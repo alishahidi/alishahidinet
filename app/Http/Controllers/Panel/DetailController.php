@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Requests\Panel\DetailRequest;
-use App\Http\Services\ImageUpload;
 use System\Auth\Auth;
 use System\Image\Image;
 
@@ -27,11 +26,11 @@ class DetailController extends PanelController
         $inputs = $request->all();
         $user = Auth::user();
         $inputs['id'] = $user->id;
-        if ($request->file("profile")["tmp_name"]) {
+        if ($request->file('profile')['tmp_name']) {
             $inputs['profile'] = [
-                'thumbnail' => Image::make("profile", "images/profile", true)->resize(60, 60)->saveFtp(quality: 90, unique: true, dateFormat: true),
-                'main' => Image::make("profile", "images/profile", true)->resize(120, 120)->saveFtp(quality: 90, unique: true, dateFormat: true)
-            ];;
+                'thumbnail' => Image::make('profile', 'images/profile', true)->resize(60, 60)->saveFtp(quality: 90, unique: true, dateFormat: true),
+                'main' => Image::make('profile', 'images/profile', true)->resize(120, 120)->saveFtp(quality: 90, unique: true, dateFormat: true),
+            ];
         }
         Auth::updateUser($inputs, ['id', 'name', 'profile', 'bio']);
         flash('user_status', 'با موفقیت آپدیت شد.');

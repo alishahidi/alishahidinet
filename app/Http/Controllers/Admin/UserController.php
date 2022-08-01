@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\UserRequest;
-use App\Http\Services\ImageUpload;
 use App\Models\User;
 use System\Auth\Auth;
 use System\Image\Image;
@@ -30,11 +29,11 @@ class UserController extends AdminController
         $request = new UserRequest();
         $inputs = $request->all();
         $inputs['id'] = $id;
-        if ($request->file("profile")["tmp_name"]) {
+        if ($request->file('profile')['tmp_name']) {
             $inputs['profile'] = [
-                'thumbnail' => Image::make("profile", "images/profile", true)->resize(60, 60)->saveFtp(quality: 90, unique: true, dateFormat: true),
-                'main' => Image::make("profile", "images/profile", true)->resize(120, 120)->saveFtp(quality: 90, unique: true, dateFormat: true)
-            ];;
+                'thumbnail' => Image::make('profile', 'images/profile', true)->resize(60, 60)->saveFtp(quality: 90, unique: true, dateFormat: true),
+                'main' => Image::make('profile', 'images/profile', true)->resize(120, 120)->saveFtp(quality: 90, unique: true, dateFormat: true),
+            ];
         }
         Auth::updateUser($inputs, ['id', 'name', 'profile', 'bio', 'password'], 'password');
 
