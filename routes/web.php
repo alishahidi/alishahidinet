@@ -24,6 +24,9 @@ Route::post('/article/{id}/comment', "Home\HomeController@comment", 'home.articl
 Route::get('/topic/{id}/{slug}', "Home\HomeController@topic", 'home.topic.show');
 Route::get('/tag/{id}/{slug}', "Home\HomeController@tag", 'home.tag.index');
 
+// Cron Controller
+Route::get('/cron/sitemap/{token}', "Home\CronController@sitemap", 'cron.sitemap');
+
 // Auth Routes
 Route::get('/auth/login', "Auth\LoginController@view", 'auth.login.view');
 Route::post('/auth/login', "Auth\LoginController@login", 'auth.login');

@@ -554,6 +554,36 @@ function paginateView($count, $perPage, $beforeCount, $afterCount, $routeUrl, $v
     return $paginateView;
 }
 
+if (! function_exists('error_400')) {
+    function error_400()
+    {
+        http_response_code(400);
+        header($_SERVER['SERVER_PROTOCOL'].' 400 Bad Request');
+        $view400 = Config::get('app.ERRORS.400');
+        if ($view400) {
+            view($view400);
+        } else {
+            view('errors.400');
+        }
+        exit;
+    }
+}
+
+if (! function_exists('error_401')) {
+    function error_401()
+    {
+        http_response_code(401);
+        header($_SERVER['SERVER_PROTOCOL'].' 401 Unauthorized');
+        $view401 = Config::get('app.ERRORS.401');
+        if ($view401) {
+            view($view401);
+        } else {
+            view('errors.401');
+        }
+        exit;
+    }
+}
+
 if (! function_exists('error_404')) {
     function error_404()
     {

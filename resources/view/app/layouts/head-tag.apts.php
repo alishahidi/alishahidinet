@@ -1,5 +1,6 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="googlebot" content="index, follow" />
 
 <!-- favicon -->
 <link rel="shortcut icon" type="image/x-icon" href="<?= asset('assets/app/images/favicon.ico') ?>">
