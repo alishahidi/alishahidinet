@@ -4,14 +4,14 @@ namespace App\Http\Controllers\File;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\File\UploadImageRequest;
-use App\Http\Services\ImageUpload;
+use System\Image\Image;
 
 class ImageController extends Controller
 {
     public function upload()
     {
         new UploadImageRequest(false);
-        $image = ImageUpload::dateFormatUploadEditor('file');
+        $image = Image::make('file')->saveFtp(quality: 45, unique: true, dateFormat: true);
         echo asset_ftp($image);
     }
 }

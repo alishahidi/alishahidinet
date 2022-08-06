@@ -251,7 +251,7 @@ if (! function_exists('findRouteByName')) {
 }
 
 if (! function_exists('route')) {
-    function route($name, $params = [])
+    function route($name, $params = [], $https = false)
     {
         if (! is_array($params)) {
             throw new \Exception('route params must be array.');
@@ -270,7 +270,9 @@ if (! function_exists('route')) {
             $route = str_replace($routeMatch, array_pop($params), $route);
         }
 
-        return currentDomain().'/'.trim($route, ' /');
+        $currentDomain = $https ? str_replace(['http'], 'https', str_replace(['https'], 'http', currentDomain())) : currentDomain();
+
+        return $currentDomain.'/'.trim($route, ' /');
     }
 }
 

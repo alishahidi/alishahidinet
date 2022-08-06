@@ -9,12 +9,12 @@
 <meta name="description" content="<?= hpd($article->description) ?>" />
 <meta name="keywords" content="<?= implode(', ', objectToArray($article->tags(), 'name')) ?>">
 <meta name="author" content="<?= hpd($article->user()->name) ?>">
-<link rel="canonical" href="<?= route('home.article.show', [$article->id, hpd($article->title)]) ?>" />
+<link rel="canonical" href="<?= route('home.article.show', [$article->id, dash_space($article->title)]) ?>" />
 <meta property="og:locale" content="fa_IR" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="<?= hpd($article->title) ?>‌" />
 <meta property="og:description" content="<?= hpd($article->description) ?>" />
-<meta property="og:url" content="<?= route('home.article.show', [$article->id, hpd($article->title)]) ?>" />
+<meta property="og:url" content="<?= route('home.article.show', [$article->id, dash_space($article->title)]) ?>" />
 <meta property="og:site_name" content="علی شهیدی - مقاله" />
 <meta property="article:publisher" content="<?= currentDomain() ?>" />
 <meta property="article:published_time" content="<?= date('D M j G:i:s T Y', strtotime($article->created_at)) ?>" />
@@ -95,9 +95,9 @@
                     </div>
                 </div>
             </div>
-            <div class="post-main mt-4">
+            <article class="post-main mt-4">
                 <?= hpd($article->content) ?>
-            </div>
+            </article>
             <div class="post-footer">
                 <div class="tag d-flex align-items-center mt-3 mb-5 py-4 border-bottom">
                     <h4 class="text">برچسب ها:</h4>

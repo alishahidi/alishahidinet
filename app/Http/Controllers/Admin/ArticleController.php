@@ -47,8 +47,8 @@ class ArticleController extends AdminController
         $tags = $this->getTagifyArray($inputs['tags']);
         unset($inputs['tags']);
         $inputs['image'] = [
-            'thumbnail' => Image::make('image', 'images/article', true)->resize(360, 310)->text('alishahidinet.ir', x: 10, y: 10, size: 19)->saveFtp(quality: 90, unique: true, dateFormat: true),
-            'main' => Image::make('image', 'images/article', true)->resize(530, 450)->text('alishahidinet.ir', x: 8, y: 10, size: 22)->saveFtp(quality: 90, unique: true, dateFormat: true),
+            'thumbnail' => Image::make('image', 'images/article', true)->resize(390, 340)->text('alishahidinet.ir', x: 10, y: 10, size: 19)->saveFtp(quality: 100, unique: true, dateFormat: true),
+            'main' => Image::make('image', 'images/article', true)->resize(560, 480)->text('alishahidinet.ir', x: 8, y: 10, size: 22)->saveFtp(quality: 100, unique: true, dateFormat: true),
         ];
         $inputs['view'] = 0;
         $article = Article::create($inputs);
@@ -88,8 +88,8 @@ class ArticleController extends AdminController
         unset($inputs['tags']);
         if ($request->file('image')['tmp_name']) {
             $inputs['image'] = [
-                'thumbnail' => Image::make('image', 'images/article', true)->resize(360, 310)->text('alishahidinet.ir', x: 10, y: 10, size: 19)->saveFtp(quality: 90, unique: true, dateFormat: true),
-                'main' => Image::make('image', 'images/article', true)->resize(530, 450)->text('alishahidinet.ir', x: 8, y: 10, size: 22)->saveFtp(quality: 90, unique: true, dateFormat: true),
+                'thumbnail' => Image::make('image', 'images/article', true)->resize(390, 340)->text('alishahidinet.ir', x: 10, y: 10, size: 19)->saveFtp(quality: 100, unique: true, dateFormat: true),
+                'main' => Image::make('image', 'images/article', true)->resize(560, 480)->text('alishahidinet.ir', x: 8, y: 10, size: 22)->saveFtp(quality: 100, unique: true, dateFormat: true),
             ];
         }
         foreach ($articleTags as $articleTag) {

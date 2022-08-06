@@ -109,8 +109,8 @@
 <script type="text/javascript">
     tinymce.init({
         selector: 'textarea#editor',
-        plugins: 'fullscreen directionality quickbars table image link lists media autoresize codesample help',
-        toolbar: 'fullscreen | undo redo | blocks | bold italic | alignleft aligncentre alignright alignjustify | indent outdent | bullist numlist | codesample | ltr rtl',
+        plugins: 'fullscreen directionality quickbars table image link lists media autoresize codesample code help',
+        toolbar: 'fullscreen | undo redo | blocks | bold italic | alignleft aligncentre alignright alignjustify | indent outdent | bullist numlist | codesample code | ltr rtl',
         skin: window.localStorage.getItem("data-theme") === "dark" ? "oxide-dark" : "oxide",
         content_css: window.localStorage.getItem("data-theme") === "dark" ? "dark" : "light",
         min_height: 400
