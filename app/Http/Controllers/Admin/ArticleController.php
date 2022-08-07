@@ -63,7 +63,7 @@ class ArticleController extends AdminController
             TagArticle::create(['tag_id' => $findTag->id, 'article_id' => $article->insertId]);
         }
         $updateArticle = Article::find($article->insertId);
-        $updateArticle->url_id = Url::set('home.article.show', [$article->insertId, $article->title]);
+        $updateArticle->url_id = Url::set('home.article.show', [$article->insertId, dash_space($article->title)]);
         $updateArticle->save();
 
         return redirect(route('admin.article.index'));
