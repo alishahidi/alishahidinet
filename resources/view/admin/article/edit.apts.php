@@ -138,7 +138,7 @@
         }
         let data = new FormData();
         data.append('file', imageUploadInput.files[0]);
-        axios.post("<?= route('file.image.upload').'?_token='.get_csrf() ?>", data, {
+        axios.post("<?= route('admin.article.upload').'?_token='.get_csrf() ?>", data, {
                 onUploadProgress: (event) => {
                     let percent = Math.floor((event.loaded * 100) / event.total);
                     if (parent !== 100) {

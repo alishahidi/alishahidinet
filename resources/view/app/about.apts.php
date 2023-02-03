@@ -121,7 +121,7 @@
                                     <div class="row">
                                         <div class="col-lg-5 col-12 mb-3">
                                             <div class="project-card-banner">
-                                                <img src="<?= asset_ftp($project->image) ?>" alt="<?= e($project->title) ?>" class="project-banner-img">
+                                                <img src="<?= asset($project->image) ?>" alt="<?= e($project->title) ?>" class="project-banner-img">
                                             </div>
                                         </div>
                                         <div class="col-lg-7 col-12 mb-3">

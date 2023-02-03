@@ -19,8 +19,8 @@
 <!-- custom css -->
 <link rel="stylesheet" href="<?= asset('assets/app/css/style.css') ?>">
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-G2S0FTC995"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D83H63W3Q8"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
 
@@ -29,5 +29,5 @@
     }
     gtag('js', new Date());
 
-    gtag('config', 'G-G2S0FTC995');
+    gtag('config', 'G-D83H63W3Q8');
 </script>

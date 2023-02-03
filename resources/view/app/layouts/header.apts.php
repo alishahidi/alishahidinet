@@ -3,10 +3,6 @@
         <nav class="navbar flex-row-reverse">
             <a class="navbar-brand" href="<?= route('home.index') ?>">علی شهیدی</a>
             <div class="btn-group gap-3 flex-row-reverse d-lg-none">
-                <button class="theme-btn theme-btn-mobile light d-flex align-items-center justify-content-center rounded-circle">
-                    <ion-icon name="moon" class="moon"></ion-icon>
-                    <ion-icon name="sunny-outline" class="sun"></ion-icon>
-                </button>
                 <button class="nav-menu-btn d-flex align-items-center justify-content-center rounded-circle">
                     <ion-icon name="menu-outline"></ion-icon>
                 </button>
@@ -49,10 +45,6 @@
                         </li>
                     <?php } ?>
                 </ul>
-                <button class="theme-btn theme-btn-desktop light d-lg-flex">
-                    <ion-icon name="moon" class="moon"></ion-icon>
-                    <ion-icon name="sunny-outline" class="sun"></ion-icon>
-                </button>
             </div>
             <div class="mobile-nav">
                 <button class="nav-close-btn d-flex align-items-center justify-content-center rounded-circle">
@@ -83,19 +75,19 @@
                             <li class="nav-item mt-3">
                                 <a class="nav-link" href="<?= route('auth.login') ?>">ورود</a>
                             </li>
-                    <?php } else { ?>
-                        <?php if (\System\Auth\Auth::user()->permission == 'root') { ?>
+                        <?php } else { ?>
+                            <?php if (\System\Auth\Auth::user()->permission == 'root') { ?>
+                                <li class="nav-item mt-3">
+                                    <a class="nav-link" href="<?= route('admin.index') ?>">پنل ادمین</a>
+                                </li>
+                            <?php } ?>
                             <li class="nav-item mt-3">
-                                <a class="nav-link" href="<?= route('admin.index') ?>">پنل ادمین</a>
+                                <a class="nav-link" href="<?= route('panel.index') ?>">پنل کاربری</a>
+                            </li>
+                            <li class="nav-item mt-3">
+                                <a class="nav-link" href="<?= route('auth.logout') ?>">خروج</a>
                             </li>
                         <?php } ?>
-                        <li class="nav-item mt-3">
-                            <a class="nav-link" href="<?= route('panel.index') ?>">پنل کاربری</a>
-                        </li>
-                        <li class="nav-item mt-3">
-                            <a class="nav-link" href="<?= route('auth.logout') ?>">خروج</a>
-                        </li>
-                    <?php } ?>
                     </ul>
                 </div>
                 <div class="wrapper mt-4">

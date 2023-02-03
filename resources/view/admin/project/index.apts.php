@@ -54,7 +54,7 @@
                             <td><?= e($project->title) ?></td>
                             <td><?= e(limitDotPrint($project->description, 30)) ?></td>
                             <td><a href="<?= e($project->link) ?>"><?= e($project->link) ?></a></td>
-                            <td><img src="<?= asset_ftp($project->image) ?>" style="width: 54px;" alt="image" /></td>
+                            <td><img src="<?= asset($project->image) ?>" style="width: 54px;" alt="image" /></td>
                             <td><?= jdate($project->created_at)->format('%A, %d %B %y') ?></td>
                             <td><?= $project->updated_at ? jdate($project->updated_at)->format('%A, %d %B %y') : '--' ?></td>
                         </tr>

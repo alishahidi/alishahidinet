@@ -25,7 +25,7 @@
                         <div class="blog-card row">
                             <div class="col-sm-5">
                                 <div class="blog-card-banner d-sm-block">
-                                    <img src="<?= asset_ftp($article->image['main']) ?>" alt="<?= e($article->title) ?>" class="blog-banner-img">
+                                    <img src="<?= asset($article->image['main']) ?>" alt="<?= e($article->title) ?>" class="blog-banner-img">
                                 </div>
                             </div>
 
@@ -38,7 +38,7 @@
                                     <p class="post-text"><?= e($article->description) ?></p>
                                     <div class="wrapper-flex">
                                         <div class="profile-wrapper d-md-block">
-                                            <img src="<?= asset_ftp($article->user()->profile['thumbnail']) ?>" alt="<?= e($article->user()->name) ?>" width="50" height="50" />
+                                            <img src="<?= asset($article->user()->profile['thumbnail']) ?>" alt="<?= e($article->user()->name) ?>" width="50" height="50" />
                                         </div>
 
                                         <div class="wrapper d-flex justify-content-between text-center flex-wrap gap-3">

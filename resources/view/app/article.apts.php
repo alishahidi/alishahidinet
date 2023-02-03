@@ -9,17 +9,17 @@
 <meta name="description" content="<?= hpd($article->description) ?>" />
 <meta name="keywords" content="<?= implode(', ', objectToArray($article->tags(), 'name')) ?>">
 <meta name="author" content="<?= hpd($article->user()->name) ?>">
-<link rel="canonical" href="<?= route('home.article.show', [$article->id, dash_space($article->title)]) ?>" />
+<link rel="canonical" href="<?= route('home.article.show', [$article->id, hpd($article->title)]) ?>" />
 <meta property="og:locale" content="fa_IR" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="<?= hpd($article->title) ?>‌" />
 <meta property="og:description" content="<?= hpd($article->description) ?>" />
-<meta property="og:url" content="<?= route('home.article.show', [$article->id, dash_space($article->title)]) ?>" />
+<meta property="og:url" content="<?= route('home.article.show', [$article->id, hpd($article->title)]) ?>" />
 <meta property="og:site_name" content="علی شهیدی - مقاله" />
 <meta property="article:publisher" content="<?= currentDomain() ?>" />
 <meta property="article:published_time" content="<?= date('D M j G:i:s T Y', strtotime($article->created_at)) ?>" />
 <meta property="article:modified_time" content="<?= date('D M j G:i:s T Y', strtotime($article->updated_at)) ?>" />
-<meta property="og:image" content="<?= asset_ftp($article->image['main']) ?>" />
+<meta property="og:image" content="<?= asset($article->image['main']) ?>" />
 <meta property="og:image:width" content="510" />
 <meta property="og:image:height" content="350" />
 <meta property="og:image:type" content="image/jpeg" />
@@ -61,7 +61,7 @@
                         </h1>
                         <div class="wrapper-flex">
                             <div class="post-img-wrapper">
-                                <img src="<?= asset_ftp($article->user()->profile['thumbnail']) ?>" alt="<?= e($article->user()->name) ?>" width="50" />
+                                <img src="<?= asset($article->user()->profile['thumbnail']) ?>" alt="<?= e($article->user()->name) ?>" width="50" />
                             </div>
 
                             <div class="wrapper d-flex justify-content-between text-center flex-wrap">
@@ -90,7 +90,7 @@
                     </div>
                     <div class="col-md-5 col-12 mb-3">
                         <div class="post-header-img">
-                            <img src="<?= asset_ftp($article->image['main']) ?>" alt="<?= e($article->title) ?>" class="blog-banner-img">
+                            <img src="<?= asset($article->image['main']) ?>" alt="<?= e($article->title) ?>" class="blog-banner-img">
                         </div>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
                 </div>
                 <div class="author d-flex pb-5 border-bottom">
                     <div class="author-profile flex-shrink-0">
-                        <img src="<?= asset_ftp($article->user()->profile['main']) ?>" class="rounded-circle w-100" alt="<?= e($article->user()->name) ?>">
+                        <img src="<?= asset($article->user()->profile['main']) ?>" class="rounded-circle w-100" alt="<?= e($article->user()->name) ?>">
                     </div>
                     <div class="me-5">
                         <h5 class="author-name"><?= e($article->user()->name) ?></h5>
@@ -126,7 +126,7 @@
                                         <div class="row">
                                             <div class="col-lg-5 col-12 mb-3">
                                                 <div class="related-card-banner">
-                                                    <img src="<?= asset_ftp($relatedArticle->image['thumbnail']) ?>" alt="<?= e($relatedArticle->title) ?>" class="related-banner-img">
+                                                    <img src="<?= asset($relatedArticle->image['thumbnail']) ?>" alt="<?= e($relatedArticle->title) ?>" class="related-banner-img">
                                                 </div>
                                             </div>
                                             <div class="col-lg-7 col-12 mb-3">
@@ -172,7 +172,7 @@
                                     <div class="row">
                                         <div class="col-xl-1 col-sm-2 col-0 d-sm-block d-none">
                                             <div class="comment-img-wrapper">
-                                                <img src="<?= asset_ftp($comment->user()->profile['thumbnail']) ?>" alt="<?= e($comment->user()->name) ?>" width="50" />
+                                                <img src="<?= asset($comment->user()->profile['thumbnail']) ?>" alt="<?= e($comment->user()->name) ?>" width="50" />
                                             </div>
                                         </div>
                                         <div class="col-xl-11 col-sm-10 col-12 d-flex flex-column justify-content-between">

@@ -17,7 +17,7 @@
         <div class="border-bottom mb-4 pb-3">
             <a href="<?= backUrl() ?>" class="custom-btn custom-btn-secondary text-center rounded-0 w-100">بازگشت</a>
         </div>
-        <img class="mb-3 rounded" src="<?= asset_ftp($comment->user()->profile) ?>" alt="<?= e($comment->user()->name) ?>" width="60" />
+        <img class="mb-3 rounded" src="<?= asset($comment->user()->profile) ?>" alt="<?= e($comment->user()->name) ?>" width="60" />
         <p><b>اسم: </b><?= e($comment->user()->name) ?></p>
         <p><?= e($comment->comment) ?></p>
     </div>

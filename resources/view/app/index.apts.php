@@ -20,12 +20,12 @@
         <div class="row">
             <div class="left col-lg-6">
                 <h1 class="h1">
-                    سلام من<b> علی</b> هستم.<br>برنامه نویس فول استک
+                    سلام من<b> علی</b> هستم.<br><small>توسعه دهنده, برنامه نویس</small>
                 </h1>
                 <p class="h3">
                     من به وب و gnu/linux علاقه دارم.
                 </p>
-                <div class="btn-group d-flex justify-content-center flex-wrap gap-3">
+                <div class="btn-group d-flex flex-wrap gap-3">
                     <a href="<?= route('home.contact.index') ?>" class="custom-btn custom-btn-primary">ارتباط با من</a>
                     <a href="<?= route('home.about.index') ?>" class="custom-btn custom-btn-secondary">درباره من</a>
                 </div>
@@ -40,6 +40,16 @@
                 </div>
             </div>
         </div>
+        <div class="row mt-5">
+            <div class="col-12">
+                <h1 class="h2 mb-5">
+                    بیشتر در باره من
+                </h1>
+                <p class="h3">
+                    من برنامه نویس با چندین سال تجربه شخصی در بخش های مختلف هستم با تمرکز به PHP Laravel. و همچنین من Linux و Emacs geek هستم. همیشه تلاش کردم بهترین راه و روش انتخاب کنم و در اون بروز باشم.
+                </p>
+            </div>
+        </div>
     </div>
 </div>
 <div class="main">
@@ -52,7 +62,7 @@
                         <div class="blog-card row">
                             <div class="col-sm-5">
                                 <div class="blog-card-banner d-sm-block">
-                                    <img src="<?= asset_ftp($article->image['thumbnail']) ?>" alt="<?= e($article->title) ?>" class="blog-banner-img">
+                                    <img src="<?= asset($article->image['thumbnail']) ?>" alt="<?= e($article->title) ?>" class="blog-banner-img">
                                 </div>
                             </div>
 
@@ -65,7 +75,7 @@
                                     <p class="post-text"><?= e($article->description) ?></p>
                                     <div class="wrapper-flex">
                                         <div class="profile-wrapper d-md-block">
-                                            <img src="<?= asset_ftp($article->user()->profile['thumbnail']) ?>" alt="<?= e($article->user()->name) ?>" width="50" height="50" />
+                                            <img src="<?= asset($article->user()->profile['thumbnail']) ?>" alt="<?= e($article->user()->name) ?>" width="50" height="50" />
                                         </div>
 
                                         <div class="wrapper d-flex justify-content-between text-center flex-wrap gap-3">

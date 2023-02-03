@@ -53,7 +53,7 @@
                             </td>
                             <td><?= e($user->name) ?></td>
                             <td><?= e($user->email) ?></td>
-                            <td><img src="<?= asset_ftp($user->profile['thumbnail']) ?>" style="width: 54px;" alt="image" /></td>
+                            <td><img src="<?= asset($user->profile['thumbnail']) ?>" style="width: 54px;" alt="image" /></td>
                             <td>
                                 <?= verify_password($user->password) ? "<ion-icon class='text-success' name='shield-checkmark-outline'></ion-icon>" : "<ion-icon class='text-danger' name='shield-outline'></ion-icon>" ?>
                             </td>

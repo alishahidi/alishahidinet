@@ -55,7 +55,7 @@
                             </td>
                             <td><?= e($article->title) ?></td>
                             <td><?= e(limitDotPrint($article->description, 30)) ?></td>
-                            <td><img src="<?= asset_ftp($article->image['thumbnail']) ?>" style="width: 54px;" alt="image" /></td>
+                            <td><img src="<?= asset($article->image['thumbnail']) ?>" style="width: 54px;" alt="image" /></td>
                             <td><?= e($article->topic()->name) ?></td>
                             <td><?= e($article->user()->name) ?></td>
                             <td><?= e(implode(', ', objectToArray($article->tags(), 'name'))) ?></td>
