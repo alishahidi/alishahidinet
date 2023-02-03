@@ -9,7 +9,7 @@ trait HasCsrf
     public static function setCsrf()
     {
         $token = self::generateUserAgentToken();
-        Session::set('_csrf', ['token' => $token], 24 * 60 * 60);
+        Session::set('_csrf', ['token' => $token]);
 
         return true;
     }

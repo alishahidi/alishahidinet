@@ -3,10 +3,10 @@
 namespace System\Application;
 
 use Dotenv\Dotenv;
+use stdClass;
 use System\Config\Config;
-use System\Security\Security;
 
-class Application
+class Application extends stdClass
 {
     public function __construct()
     {
@@ -22,7 +22,6 @@ class Application
         $this->loadProviders();
         $this->loadHelpers();
         $this->loadSessions();
-        $this->loadCsrf();
         $this->registerRoutes();
         $this->routing();
     }
@@ -54,13 +53,6 @@ class Application
         $this->clearSetSessionService('flash', 'tmp_flash');
         $this->clearSetSessionService('error', 'tmp_error');
         $this->initialOldSession();
-    }
-
-    private function loadCsrf()
-    {
-        if (getMethod() !== 'post') {
-            Security::setCsrf();
-        }
     }
 
     private function requireFile($filePath)
