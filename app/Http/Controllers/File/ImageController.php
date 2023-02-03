@@ -11,7 +11,7 @@ class ImageController extends Controller
     public function upload()
     {
         new UploadImageRequest(false);
-        $image = Image::make('file')->saveFtp(quality: 45, unique: true, dateFormat: true);
-        echo asset_ftp($image);
+        $image = Image::make('file')->save(quality: 45, unique: true, dateFormat: true);
+        echo asset($image);
     }
 }

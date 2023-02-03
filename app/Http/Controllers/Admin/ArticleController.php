@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\ArticleRequest;
+use App\Http\Requests\File\UploadImageRequest;
 use App\Http\Services\Url;
 use App\Models\Article;
 use App\Models\Tag;
@@ -39,6 +40,13 @@ class ArticleController extends AdminController
         return $tagArray;
     }
 
+    public function upload()
+    {
+        new UploadImageRequest(false);
+        $image = Image::make('file', 'upload', true)->save(quality: 45, unique: true, dateFormat: true);
+        echo asset($image);
+    }
+
     public function store()
     {
         $request = new ArticleRequest();
@@ -47,8 +55,8 @@ class ArticleController extends AdminController
         $tags = $this->getTagifyArray($inputs['tags']);
         unset($inputs['tags']);
         $inputs['image'] = [
-            'thumbnail' => Image::make('image', 'images/article', true)->resize(390, 340)->text('alishahidinet.ir', x: 10, y: 10, size: 19)->saveFtp(quality: 100, unique: true, dateFormat: true),
-            'main' => Image::make('image', 'images/article', true)->resize(560, 480)->text('alishahidinet.ir', x: 8, y: 10, size: 22)->saveFtp(quality: 100, unique: true, dateFormat: true),
+            'thumbnail' => Image::make('image', 'images/article', true)->resize(390, 340)->text('alishahidinet.ir', x: 10, y: 10, size: 19)->save(quality: 100, unique: true, dateFormat: true),
+            'main' => Image::make('image', 'images/article', true)->resize(560, 480)->text('alishahidinet.ir', x: 8, y: 10, size: 22)->save(quality: 100, unique: true, dateFormat: true),
         ];
         $inputs['view'] = 0;
         $article = Article::create($inputs);
@@ -88,8 +96,8 @@ class ArticleController extends AdminController
         unset($inputs['tags']);
         if ($request->file('image')['tmp_name']) {
             $inputs['image'] = [
-                'thumbnail' => Image::make('image', 'images/article', true)->resize(390, 340)->text('alishahidinet.ir', x: 10, y: 10, size: 19)->saveFtp(quality: 100, unique: true, dateFormat: true),
-                'main' => Image::make('image', 'images/article', true)->resize(560, 480)->text('alishahidinet.ir', x: 8, y: 10, size: 22)->saveFtp(quality: 100, unique: true, dateFormat: true),
+                'thumbnail' => Image::make('image', 'images/article', true)->resize(390, 340)->text('alishahidinet.ir', x: 10, y: 10, size: 19)->save(quality: 100, unique: true, dateFormat: true),
+                'main' => Image::make('image', 'images/article', true)->resize(560, 480)->text('alishahidinet.ir', x: 8, y: 10, size: 22)->save(quality: 100, unique: true, dateFormat: true),
             ];
         }
         foreach ($articleTags as $articleTag) {

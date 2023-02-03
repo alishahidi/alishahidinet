@@ -19,8 +19,8 @@ class RegisterController extends Controller
         $request = new RegisterRequest();
         $inputs = $request->all();
         $inputs['profile'] = [
-            'thumbnail' => Image::make('profile', 'images/profile', true)->resize(60, 60)->saveFtp(quality: 90, unique: true, dateFormat: true),
-            'main' => Image::make('profile', 'images/profile', true)->resize(120, 120)->saveFtp(quality: 90, unique: true, dateFormat: true),
+            'thumbnail' => Image::make('profile', 'images/profile', true)->resize(60, 60)->save(quality: 90, unique: true, dateFormat: true),
+            'main' => Image::make('profile', 'images/profile', true)->resize(120, 120)->save(quality: 90, unique: true, dateFormat: true),
         ];
         $inputs['permission'] = 'user';
         $inputs['status'] = 1;
