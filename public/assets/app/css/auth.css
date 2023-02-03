@@ -1,75 +1,73 @@
-
-.auth p{
+.auth p {
   color: var(--foreground-primary);
-font-family: 'Vazirmatn', sans-serif;
-font-weight: 500;
-font-size: 1rem;
+  font-family: "Vazirmatn", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
 }
 
-.auth-card{
-	background: var(--background-tertiary);
-	padding: 25px 25px 12px 25px;
-	margin-bottom: 1rem;
-	border-radius: 5px;
-	transition: 0.25s ease;
+.auth-card {
+  background: var(--background-tertiary);
+  padding: 25px 25px 12px 25px;
+  margin-bottom: 1rem;
+  transition: 0.25s ease;
 }
 
-.auth .auth-form input[type=text], .auth .auth-form input[type=password], .auth .auth-form input[type=email] {
-        border: none;
-        background: var(--background-primary);
-        display: block;
-        width: 100%;
-        padding: 0.5rem 1rem;
-        font: inherit;
-        color: var(--foreground-secondary);
-        border-radius: 5px;
-        margin-bottom: 1.5rem;
+.auth .auth-form input[type="text"],
+.auth .auth-form input[type="password"],
+.auth .auth-form input[type="email"] {
+  border: none;
+  background: var(--background-primary);
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font: inherit;
+  color: var(--foreground-secondary);
+  margin-bottom: 1.5rem;
 }
 
 .auth .auth-form input::placeholder {
-	color: inherit;
+  color: inherit;
 }
 
-.form-check{
+.form-check {
   padding-left: 40px;
 }
 
 .auth .auth-form input:focus {
-		outline: 2px solid;
-		outline-offset: 0;
-    color: var(--foreground-secondary) !important;
-    box-shadow: none !important;
+  outline: 2px solid;
+  outline-offset: 0;
+  color: var(--foreground-secondary) !important;
+  box-shadow: none !important;
 }
 
-.auth .auth-form textarea{
-        font-family: 'Vazirmatn', sans-serif;
-        font-weight: 500;
-        border: none;
-        background: var(--action-primary);
-        display: block;
-        width: 100%;
-        padding: 1rem 1.2rem;
-        color: var(--foreground-secondary);
-        border-radius: 6px 6px 0 0;
-        margin-bottom: 1.5rem;
-        outline: none;
-        resize: none;
+.auth .auth-form textarea {
+  font-family: "Vazirmatn", sans-serif;
+  font-weight: 500;
+  border: none;
+  background: var(--action-primary);
+  display: block;
+  width: 100%;
+  padding: 1rem 1.2rem;
+  color: var(--foreground-secondary);
+  border-radius: 6px 6px 0 0;
+  margin-bottom: 1.5rem;
+  outline: none;
+  resize: none;
 }
 
-.auth .auth-form label{
+.auth .auth-form label {
   font-size: 1rem;
-font-family: 'Vazirmatn', sans-serif;
-font-weight: 700;
-margin-bottom: 13px;
-color: var(--foreground-secondary);
-
+  font-family: "Vazirmatn", sans-serif;
+  font-weight: 700;
+  margin-bottom: 13px;
+  color: var(--foreground-secondary);
 }
 
-.auth .captcha-refresh{
+.auth .captcha-refresh {
   cursor: pointer;
-  font-family: 'Vazirmatn', sans-serif;
+  font-family: "Vazirmatn", sans-serif;
   font-weight: 700;
-  font-size: .87rem;
+  font-size: 0.87rem;
   color: var(--foreground-tertiary);
   padding-right: 11px;
 }

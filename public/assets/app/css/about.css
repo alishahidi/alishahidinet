@@ -1,196 +1,187 @@
-.about-card{
-	background: var(--background-tertiary);
-	padding: 25px;
-	margin-bottom: 1rem;
-	border-radius: 10px;
-	box-shadow: 0 10px 10px hsla(0, 0%, 0%, 0.05);
-	transition: 0.25s ease;
+.about-card {
+  background: var(--background-tertiary);
+  padding: 25px;
+  margin-bottom: 1rem;
+  box-shadow: 0 10px 10px hsla(0, 0%, 0%, 0.05);
+  transition: 0.25s ease;
 }
 
-.about-text{
-		color: var(--foreground-tertiary);
-		font-family: 'Vazirmatn', sans-serif;
-		font-weight: 500;
-		font-size: 1.03rem;
+.about-text {
+  color: var(--foreground-tertiary);
+  font-family: "Vazirmatn", sans-serif;
+  font-weight: 500;
+  font-size: 1.03rem;
 }
 
-.about-details p{
-		color: var(--foreground-tertiary);
-		font-family: 'Vazirmatn', sans-serif;
-		font-weight: 500;
-		font-size: .89rem;
+.about-details p {
+  color: var(--foreground-tertiary);
+  font-family: "Vazirmatn", sans-serif;
+  font-weight: 500;
+  font-size: 0.89rem;
 }
 
-.about-details p b{
-		color: var(--foreground-secondary);
-		font-family: 'Vazirmatn', sans-serif;
-		font-weight: 700;
-		font-size: .91rem;
+.about-details p b {
+  color: var(--foreground-secondary);
+  font-family: "Vazirmatn", sans-serif;
+  font-weight: 700;
+  font-size: 0.91rem;
 }
 
-.about-details p a{
-		color: var(--foreground-secondary);
-		font-family: 'Vazirmatn', sans-serif;
-		font-weight: 700;
-		font-size: .91rem;
-		text-decoration: underline;
+.about-details p a {
+  color: var(--foreground-secondary);
+  font-family: "Vazirmatn", sans-serif;
+  font-weight: 700;
+  font-size: 0.91rem;
+  text-decoration: underline;
 }
 
-.skill-card{
-	background: var(--background-tertiary);
-	padding: 25px;
-	margin-bottom: 1rem;
-	border-radius: 10px;
-	box-shadow: 0 10px 10px hsla(0, 0%, 0%, 0.05);
-	transition: 0.25s ease;
+.skill-card {
+  background: var(--background-tertiary);
+  padding: 25px;
+  margin-bottom: 1rem;
+  box-shadow: 0 10px 10px hsla(0, 0%, 0%, 0.05);
+  transition: 0.25s ease;
 }
 
-.skill-text{
-		color: var(--foreground-tertiary);
-		font-family: 'Vazirmatn', sans-serif;
-		font-weight: 500;
-		font-size: 1.03rem;
+.skill-text {
+  color: var(--foreground-tertiary);
+  font-family: "Vazirmatn", sans-serif;
+  font-weight: 500;
+  font-size: 1.03rem;
 }
 
-.skill-title h3{
-		font-size: 0.9rem;
-		font-family: 'Vazirmatn', sans-serif;
-		font-weight: 700;
+.skill-title h3 {
+  font-size: 0.9rem;
+  font-family: "Vazirmatn", sans-serif;
+  font-weight: 700;
 }
 
-.skill-title span{
-		color: var(--foreground-secondary);
+.skill-title span {
+  color: var(--foreground-secondary);
 }
 
-.skill-progress .progress{
-		height: 8px;
-		background: var(--background-primary);
+.skill-progress .progress {
+  height: 8px;
+  background: var(--background-primary);
 }
 
-.skill-progress .progress{
-		background: var(--nord5);
+.skill-progress .progress {
+  background: var(--nord5);
 }
 
-.skill-progress .progress-bar{
-		background: var(--accent);
+.skill-progress .progress-bar {
+  background: var(--accent);
 }
 
-.summary-card{
-	background: var(--background-tertiary);
-	padding: 30px;
-	margin-bottom: 1rem;
-	box-shadow: 0 10px 10px hsla(0, 0%, 0%, 0.05);
-	transition: 0.25s ease;
+.summary-card {
+  background: var(--background-tertiary);
+  padding: 30px;
+  margin-bottom: 1rem;
+  box-shadow: 0 10px 10px hsla(0, 0%, 0%, 0.05);
+  transition: 0.25s ease;
 }
 
-.summary-card ion-icon{
-		--ionicon-stroke-width: 30px;
-		font-size: 28px;
-		background: var(--background-primary);
-		color: var(--foreground-secondary);
-		padding: 16px;
-		border-radius: 25px;
+.summary-card ion-icon {
+  --ionicon-stroke-width: 30px;
+  font-size: 28px;
+  background: var(--background-primary);
+  color: var(--foreground-secondary);
+  padding: 16px;
 }
 
-.summary-card p{
-		color: var(--foreground-tertiary);
-		font-family: 'Vazirmatn', sans-serif;
-		font-weight: 500;
-		font-size: .89rem;
+.summary-card p {
+  color: var(--foreground-tertiary);
+  font-family: "Vazirmatn", sans-serif;
+  font-weight: 500;
+  font-size: 0.89rem;
 }
 
-.service-card{
-	background: var(--background-tertiary);
-	padding: 25px;
-	margin-bottom: 1rem;
-	border-radius: 10px;
-	box-shadow: 0 10px 10px hsla(0, 0%, 0%, 0.05);
-	transition: 0.25s ease;
+.service-card {
+  background: var(--background-tertiary);
+  padding: 25px;
+  margin-bottom: 1rem;
+  box-shadow: 0 10px 10px hsla(0, 0%, 0%, 0.05);
+  transition: 0.25s ease;
 }
 
-.service-card .service-card-item{
-		padding: 15px;
-		background: var(--background-primary);
+.service-card .service-card-item {
+  padding: 15px;
+  background: var(--background-primary);
 }
 
-.service-card .service-card-item ion-icon{
-		--ionicon-stroke-width: 30px;
-		font-size: 34px;
-		color: var(--foreground-secondary);
-		padding: 16px;
+.service-card .service-card-item ion-icon {
+  --ionicon-stroke-width: 30px;
+  font-size: 34px;
+  color: var(--foreground-secondary);
+  padding: 16px;
 }
 
-.service-card .service-card-item p{
-		color: var(--foreground-tertiary);
-		font-family: 'Vazirmatn', sans-serif;
-		font-weight: 700;
-		font-size: 1rem;
+.service-card .service-card-item p {
+  color: var(--foreground-tertiary);
+  font-family: "Vazirmatn", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
 }
 
-.project-card-item{
-    background: var(--background-tertiary);
-    padding: 12px;
-    margin-bottom: 1rem;
-    border-radius: 10px;
-    box-shadow: 0 10px 10px hsla(0, 0%, 0%, 0.05);
-    transition: 0.25s ease;
-		min-height: 280px;
+.project-card-item {
+  background: var(--background-tertiary);
+  padding: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 0 10px 10px hsla(0, 0%, 0%, 0.05);
+  transition: 0.25s ease;
+  min-height: 280px;
 }
 
-.project-card-banner{
-    border-radius: 5px;
+.project-card-banner,
+.project-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.project-card-banner, .project-banner-img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.project-card-wrapper {
+  padding: 10px 5px;
+  height: 63%;
 }
 
-.project-card-wrapper{
-    padding: 10px 5px;
-		height: 63%;
+.project-topic {
+  background: var(--action-secondary);
+  color: var(--foreground-secondary);
+  font-family: "Vazirmatn", sans-serif;
+  font-weight: 700;
+  padding: 0.25rem 1rem;
+  margin-bottom: 1rem;
 }
 
-.project-topic{
-    background: var(--action-secondary);
-    color: var(--foreground-secondary);
-    font-family: 'Vazirmatn', sans-serif;
-    font-weight: 700;
-    padding: 0.25rem 1rem;
-    margin-bottom: 1rem;
+.project-topic:hover {
+  background: var(--foreground-secondary);
+  color: var(--action-secondary);
 }
 
-.project-topic:hover{
-    background: var(--foreground-secondary);
-    color: var(--action-secondary);
+.project-card .h3 {
+  line-height: 1.4;
+  margin-bottom: 1rem;
 }
 
-.project-card .h3{
-    line-height: 1.4;
-    margin-bottom: 1rem;
+.project-card .h3:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 
-.project-card .h3:hover{
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
+.project-text {
+  color: var(--foreground-tertiary);
+  font-family: "Vazirmatn", sans-serif;
+  font-weight: 500;
 }
 
-.project-text{
-    color: var(--foreground-tertiary);
-    font-family: 'Vazirmatn', sans-serif;
-    font-weight: 500;
+@media (min-width: 992px) {
+  .project-card-item {
+    min-height: 190px;
+  }
 }
 
-
-@media (min-width: 992px){
-		.project-card-item{
-				min-height: 190px;
-		}
-}
-
-@media (min-width: 1200px){
-		.project-card-item{
-				min-height: 165px;
-		}
+@media (min-width: 1200px) {
+  .project-card-item {
+    min-height: 165px;
+  }
 }
