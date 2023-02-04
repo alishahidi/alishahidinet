@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
-class Controller
+use stdClass;
+
+class Controller extends stdClass
 {
 }
