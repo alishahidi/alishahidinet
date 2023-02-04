@@ -5,7 +5,7 @@ use System\Router\Web\Route;
 Route::get('/captcha/get', 'Captcha\CaptchaController@get', 'captcha.get');
 
 // editor Routes
-Route::post('/file/image/upload', "File\ImageController@upload", 'file.image.upload');
+// Route::post('/file/image/upload', "File\ImageController@upload", 'file.image.upload');
 
 // Home Controller
 Route::get('/', "Home\HomeController@index", 'home.index');
@@ -43,6 +43,7 @@ Route::post('/admin/article/store', "Admin\ArticleController@store", 'admin.arti
 Route::get('/admin/article/edit/{id}', "Admin\ArticleController@edit", 'admin.article.edit');
 Route::put('/admin/article/update/{id}', "Admin\ArticleController@update", 'admin.article.update');
 Route::delete('/admin/article/delete/{id}', "Admin\ArticleController@destroy", 'admin.article.delete');
+Route::post('/admin/article/upload', "Admin\ArticleController@upload", 'admin.article.upload');
 
 // User Routes
 Route::get('/admin/user', "Admin\UserController@index", 'admin.user.index');
