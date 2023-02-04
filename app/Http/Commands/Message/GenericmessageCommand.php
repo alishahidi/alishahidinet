@@ -21,7 +21,6 @@
 namespace Longman\TelegramBot\Commands\SystemCommands;
 
 use App\Models\BotUser;
-use App\Models\User;
 use Longman\TelegramBot\Commands\SystemCommand;
 use Longman\TelegramBot\Commands\UserCommands\FalKeyboardCommand;
 use Longman\TelegramBot\Commands\UserCommands\HomeKeyboardCommand;
@@ -79,38 +78,38 @@ class GenericmessageCommand extends SystemCommand
         switch ($state) {
             case 'home':
                 switch ($text) {
-                    case (trim(HomeKeyboardCommand::KEYBOARD_USER_DETAILS)):
+                    case trim(HomeKeyboardCommand::KEYBOARD_USER_DETAILS):
                         $this->telegram->executeCommand('userdetails');
                         break;
-                    case (trim(HomeKeyboardCommand::KEYBOARD_HELP)):
+                    case trim(HomeKeyboardCommand::KEYBOARD_HELP):
                         $this->telegram->executeCommand('help');
                         break;
-                    case (trim(HomeKeyboardCommand::KEYBOARD_COMPRESS_IMAGE)):
+                    case trim(HomeKeyboardCommand::KEYBOARD_COMPRESS_IMAGE):
                         $this->telegram->executeCommand('compressimage');
                         break;
-                    case (trim(HomeKeyboardCommand::KEYBOARD_ADD_WATERMARK_TO_IMAGE)):
+                    case trim(HomeKeyboardCommand::KEYBOARD_ADD_WATERMARK_TO_IMAGE):
                         $this->telegram->executeCommand('watermarkimage');
                         break;
-                    case (trim(HomeKeyboardCommand::KEYBOARD_ADD_TEXT_TO_IMAGE)):
+                    case trim(HomeKeyboardCommand::KEYBOARD_ADD_TEXT_TO_IMAGE):
                         $this->telegram->executeCommand('textimage');
                         break;
-                    case (trim(HomeKeyboardCommand::KEYBOARD_BUILD_PDF)):
+                    case trim(HomeKeyboardCommand::KEYBOARD_BUILD_PDF):
                         $this->telegram->executeCommand('buildpdf');
                         break;
-                    case (trim(HomeKeyboardCommand::KEYBOARD_FAL_HAFEZ)):
+                    case trim(HomeKeyboardCommand::KEYBOARD_FAL_HAFEZ):
                         $this->telegram->executeCommand('falkeyboard');
                         break;
-                    case (trim(HomeKeyboardCommand::KEYBOARD_CALENDER)):
+                    case trim(HomeKeyboardCommand::KEYBOARD_CALENDER):
                         $this->telegram->executeCommand('calender');
                         break;
                 }
                 break;
             case 'fal':
                 switch ($text) {
-                    case (trim(FalKeyboardCommand::KEYBOARD_NUMBER)):
+                    case trim(FalKeyboardCommand::KEYBOARD_NUMBER):
                         $this->telegram->executeCommand('falnumber');
                         break;
-                    case (trim(FalKeyboardCommand::KEYBOARD_SHUFFLE)):
+                    case trim(FalKeyboardCommand::KEYBOARD_SHUFFLE):
                         $this->telegram->executeCommand('falshuffle');
                         break;
                 }
@@ -119,8 +118,6 @@ class GenericmessageCommand extends SystemCommand
                 $this->telegram->executeCommand('homekeyboard');
                 break;
         }
-
-
 
         return Request::emptyResponse();
     }

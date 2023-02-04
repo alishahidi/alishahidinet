@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use System\Database\ORM\Model;
-use System\Database\Traits\HasSoftDelete;
 
 class BotPhoto extends Model
 {

@@ -50,18 +50,26 @@ class HomeKeyboardCommand extends UserCommand
      * Main command execution
      *
      * @return ServerResponse
+     *
      * @throws TelegramException
      */
+    const KEYBOARD_USER_DETAILS = 'اطلاعات کاربری '.Emoji::CHARACTER_WOMAN;
 
-    const KEYBOARD_USER_DETAILS = 'اطلاعات کاربری ' . Emoji::CHARACTER_WOMAN;
-    const KEYBOARD_HELP = 'راهنما ' . Emoji::CHARACTER_NOTEBOOK_WITH_DECORATIVE_COVER;
-    const KEYBOARD_COMPRESS_IMAGE = 'فشرده سازی عکس ' . Emoji::CHARACTER_CLAMP;
-    const KEYBOARD_ADD_WATERMARK_TO_IMAGE = 'افزودن واتر مارک به عکس ' . Emoji::CHARACTER_SAFETY_PIN;
-    const KEYBOARD_ADD_TEXT_TO_IMAGE = 'افزودن متن به عکس ' . Emoji::CHARACTER_A_BUTTON_BLOOD_TYPE;
-    const KEYBOARD_BUILD_PDF = 'ساخت pdf ' . Emoji::CHARACTER_PAGE_WITH_CURL . Emoji::CHARACTER_NATIONAL_PARK;
-    const KEYBOARD_FAL_HAFEZ = 'فال حافظ ' . Emoji::CHARACTER_RAINBOW;
-    const KEYBOARD_CALENDER = 'تقویم ' . Emoji::CHARACTER_CALENDAR;
-    const KEYBOARD_HOME = 'بازگشت به خانه ' . Emoji::CHARACTER_HOUSE_WITH_GARDEN;
+    const KEYBOARD_HELP = 'راهنما '.Emoji::CHARACTER_NOTEBOOK_WITH_DECORATIVE_COVER;
+
+    const KEYBOARD_COMPRESS_IMAGE = 'فشرده سازی عکس '.Emoji::CHARACTER_CLAMP;
+
+    const KEYBOARD_ADD_WATERMARK_TO_IMAGE = 'افزودن واتر مارک به عکس '.Emoji::CHARACTER_SAFETY_PIN;
+
+    const KEYBOARD_ADD_TEXT_TO_IMAGE = 'افزودن متن به عکس '.Emoji::CHARACTER_A_BUTTON_BLOOD_TYPE;
+
+    const KEYBOARD_BUILD_PDF = 'ساخت pdf '.Emoji::CHARACTER_PAGE_WITH_CURL.Emoji::CHARACTER_NATIONAL_PARK;
+
+    const KEYBOARD_FAL_HAFEZ = 'فال حافظ '.Emoji::CHARACTER_RAINBOW;
+
+    const KEYBOARD_CALENDER = 'تقویم '.Emoji::CHARACTER_CALENDAR;
+
+    const KEYBOARD_HOME = 'بازگشت به خانه '.Emoji::CHARACTER_HOUSE_WITH_GARDEN;
 
     public function execute(): ServerResponse
     {
@@ -74,6 +82,7 @@ class HomeKeyboardCommand extends UserCommand
         $keyboard = $keyboard
             ->setResizeKeyboard(true)
             ->setSelective(false);
+
         return $this->replyToChat('انتخاب گزینه: ', [
             'reply_markup' => $keyboard,
         ]);

@@ -69,11 +69,12 @@ class CancelCommand extends UserCommand
      * Main command execution
      *
      * @return ServerResponse
+     *
      * @throws TelegramException
      */
     public function execute(): ServerResponse
     {
-        $text = Emoji::CHARACTER_ORANGE_SQUARE . ' سرویس فعالی ندارید ';
+        $text = Emoji::CHARACTER_ORANGE_SQUARE.' سرویس فعالی ندارید ';
 
         // Cancel current conversation if any
         $conversation = new Conversation(
@@ -83,7 +84,7 @@ class CancelCommand extends UserCommand
 
         if ($conversation_command = $conversation->getCommand()) {
             $conversation->cancel();
-            $text = Emoji::CHARACTER_RED_TRIANGLE_POINTED_DOWN . " سرویس کنسل شد. <= $conversation_command";
+            $text = Emoji::CHARACTER_RED_TRIANGLE_POINTED_DOWN." سرویس کنسل شد. <= $conversation_command";
         }
 
         return $this->replyToChat($text);
@@ -92,9 +93,9 @@ class CancelCommand extends UserCommand
     /**
      * Remove the keyboard and output a text.
      *
-     * @param string $text
-     *
+     * @param  string  $text
      * @return ServerResponse
+     *
      * @throws TelegramException
      */
     private function removeKeyboard(string $text): ServerResponse

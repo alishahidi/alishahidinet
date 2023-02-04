@@ -74,21 +74,22 @@ class textimageCommand extends UserCommand
      * Main command execution
      *
      * @return ServerResponse
+     *
      * @throws TelegramException
      */
     public function execute(): ServerResponse
     {
         $message = $this->getMessage();
 
-        $chat    = $message->getChat();
-        $user    = $message->getFrom();
-        $text    = trim($message->getText(true));
+        $chat = $message->getChat();
+        $user = $message->getFrom();
+        $text = trim($message->getText(true));
         $chat_id = $chat->getId();
         $user_id = $user->getId();
 
         // Preparing response
         $data = [
-            'chat_id'      => $chat_id,
+            'chat_id' => $chat_id,
             'parse_mode' => 'markdown',
         ];
 
@@ -102,35 +103,36 @@ class textimageCommand extends UserCommand
 
         // Load any existing notes from this conversation
         $notes = &$this->conversation->notes;
-        !is_array($notes) && $notes = [];
+        ! is_array($notes) && $notes = [];
 
         // Load the current state of the conversation
         $state = $notes['state'] ?? 0;
-        if ($text == trim(HomeKeyboardCommand::KEYBOARD_ADD_TEXT_TO_IMAGE))
+        if ($text == trim(HomeKeyboardCommand::KEYBOARD_ADD_TEXT_TO_IMAGE)) {
             $text = '';
+        }
 
         $result = RequestBot::emptyResponse();
 
         // Send chat action "typing..."
         RequestBot::sendChatAction([
             'chat_id' => $chat_id,
-            'action'  => ChatAction::TYPING,
+            'action' => ChatAction::TYPING,
         ]);
-        
+
         $filesystem = new Filesystem();
 
         // State machine
         // Every time a step is achieved the state is updated
         switch ($state) {
             case 0:
-                if ($text === '' || !is_numeric($text)) {
+                if ($text === '' || ! is_numeric($text)) {
                     $notes['state'] = 0;
                     $this->conversation->update();
 
-                    $data['text'] = Emoji::CHARACTER_KEYCAP_0 . ' اندازه فونت را وارد کنید.';
+                    $data['text'] = Emoji::CHARACTER_KEYCAP_0.' اندازه فونت را وارد کنید.';
 
                     if ($text !== '') {
-                        $data['text'] = Emoji::CHARACTER_RED_SQUARE . 'اندازه فونت را بصورت عدد وارد کنید.';
+                        $data['text'] = Emoji::CHARACTER_RED_SQUARE.'اندازه فونت را بصورت عدد وارد کنید.';
                     }
 
                     $result = RequestBot::sendMessage($data);
@@ -138,7 +140,7 @@ class textimageCommand extends UserCommand
                 }
 
                 $notes['size'] = (int) $text;
-                $text          = '';
+                $text = '';
 
                 // No break!
             case 1:
@@ -146,29 +148,29 @@ class textimageCommand extends UserCommand
                     $notes['state'] = 1;
                     $this->conversation->update();
 
-                    $data['text'] = Emoji::CHARACTER_KEYCAP_1 . ' کد رنگ را وارد کنید. #ffffff';
+                    $data['text'] = Emoji::CHARACTER_KEYCAP_1.' کد رنگ را وارد کنید. #ffffff';
 
                     $result = RequestBot::sendMessage($data);
                     break;
                 }
 
                 $notes['color'] = $text;
-                $text          = '';
+                $text = '';
 
                 // No break!
             case 2:
-                if ($text === '' || !is_numeric($text)) {
+                if ($text === '' || ! is_numeric($text)) {
                     $notes['state'] = 2;
                     $this->conversation->update();
 
-                    $data['text'] = Emoji::CHARACTER_KEYCAP_2 . ' عدد موقعیت متن را وارد کنید:' . PHP_EOL . PHP_EOL .
-                        '*1*. top-right' . PHP_EOL .
-                        '*2*. top-left' . PHP_EOL .
-                        '*3*. bottom-right' . PHP_EOL .
+                    $data['text'] = Emoji::CHARACTER_KEYCAP_2.' عدد موقعیت متن را وارد کنید:'.PHP_EOL.PHP_EOL.
+                        '*1*. top-right'.PHP_EOL.
+                        '*2*. top-left'.PHP_EOL.
+                        '*3*. bottom-right'.PHP_EOL.
                         '*4*. bottom-left';
 
                     if ($text !== '') {
-                        $data['text'] = Emoji::CHARACTER_RED_SQUARE . 'باید عدد موقعیت متن را وارد کنید.';
+                        $data['text'] = Emoji::CHARACTER_RED_SQUARE.'باید عدد موقعیت متن را وارد کنید.';
                     }
 
                     $result = RequestBot::sendMessage($data);
@@ -176,18 +178,18 @@ class textimageCommand extends UserCommand
                 }
 
                 $notes['pos'] = $text;
-                $text             = '';
+                $text = '';
 
                 // No break!
             case 3:
-                if ($text === '' || !is_numeric($text)) {
+                if ($text === '' || ! is_numeric($text)) {
                     $notes['state'] = 3;
                     $this->conversation->update();
 
-                    $data['text'] = Emoji::CHARACTER_KEYCAP_3 . ' زاویه را وارد کنید.';
+                    $data['text'] = Emoji::CHARACTER_KEYCAP_3.' زاویه را وارد کنید.';
 
                     if ($text !== '') {
-                        $data['text'] = Emoji::CHARACTER_RED_SQUARE . 'زاویه را بصورت عدد وارد کنید.';
+                        $data['text'] = Emoji::CHARACTER_RED_SQUARE.'زاویه را بصورت عدد وارد کنید.';
                     }
 
                     $result = RequestBot::sendMessage($data);
@@ -195,22 +197,22 @@ class textimageCommand extends UserCommand
                 }
 
                 $notes['angle'] = (int) $text;
-                $text          = '';
+                $text = '';
 
                 // No break!
             case 4:
-                if ($text === '' || !is_numeric($text)) {
+                if ($text === '' || ! is_numeric($text)) {
                     $notes['state'] = 4;
                     $this->conversation->update();
 
-                    $data['text'] = Emoji::CHARACTER_KEYCAP_4 . ' عدد نوع فونت وارد کنید:' . PHP_EOL . PHP_EOL .
-                        '*1*. Vazirmatn' . PHP_EOL .
-                        '*2*. Robot' . PHP_EOL .
-                        '*3*. Source Code Pro' . PHP_EOL .
+                    $data['text'] = Emoji::CHARACTER_KEYCAP_4.' عدد نوع فونت وارد کنید:'.PHP_EOL.PHP_EOL.
+                        '*1*. Vazirmatn'.PHP_EOL.
+                        '*2*. Robot'.PHP_EOL.
+                        '*3*. Source Code Pro'.PHP_EOL.
                         '*4*. JetBrains Mono';
 
                     if ($text !== '') {
-                        $data['text'] = Emoji::CHARACTER_RED_SQUARE . 'باید عدد فونت را وارد کنید.';
+                        $data['text'] = Emoji::CHARACTER_RED_SQUARE.'باید عدد فونت را وارد کنید.';
                     }
 
                     $result = RequestBot::sendMessage($data);
@@ -218,20 +220,20 @@ class textimageCommand extends UserCommand
                 }
 
                 $notes['font'] = $text;
-                $text             = '';
+                $text = '';
 
                 // No break!
 
             case 5:
-                if ($text === '' || !is_numeric($text)) {
+                if ($text === '' || ! is_numeric($text)) {
                     $notes['state'] = 5;
                     $this->conversation->update();
 
-                    $data['text'] = Emoji::CHARACTER_KEYCAP_5 . ' مقدار x را وارد کنید' . PHP_EOL .
+                    $data['text'] = Emoji::CHARACTER_KEYCAP_5.' مقدار x را وارد کنید'.PHP_EOL.
                         'به معنی فاصله از طرفین';
 
                     if ($text !== '') {
-                        $data['text'] = Emoji::CHARACTER_RED_SQUARE . 'مقدار x را بصورت عدد وارد کنید.';
+                        $data['text'] = Emoji::CHARACTER_RED_SQUARE.'مقدار x را بصورت عدد وارد کنید.';
                     }
 
                     $result = RequestBot::sendMessage($data);
@@ -239,19 +241,19 @@ class textimageCommand extends UserCommand
                 }
 
                 $notes['x'] = (int) $text;
-                $text          = '';
+                $text = '';
 
                 // No break!
             case 6:
-                if ($text === '' || !is_numeric($text)) {
+                if ($text === '' || ! is_numeric($text)) {
                     $notes['state'] = 6;
                     $this->conversation->update();
 
-                    $data['text'] = Emoji::CHARACTER_KEYCAP_6 . ' مقدار y را وارد کنید' . PHP_EOL .
+                    $data['text'] = Emoji::CHARACTER_KEYCAP_6.' مقدار y را وارد کنید'.PHP_EOL.
                         'به معنی فاصله از طرفین';
 
                     if ($text !== '') {
-                        $data['text'] = Emoji::CHARACTER_RED_SQUARE . 'مقدار y را بصورت عدد وارد کنید.';
+                        $data['text'] = Emoji::CHARACTER_RED_SQUARE.'مقدار y را بصورت عدد وارد کنید.';
                     }
 
                     $result = RequestBot::sendMessage($data);
@@ -259,7 +261,7 @@ class textimageCommand extends UserCommand
                 }
 
                 $notes['y'] = (int) $text;
-                $text          = '';
+                $text = '';
 
                 // No break!
             case 7:
@@ -267,55 +269,55 @@ class textimageCommand extends UserCommand
                     $notes['state'] = 7;
                     $this->conversation->update();
 
-                    $data['text'] = Emoji::CHARACTER_KEYCAP_7 . ' متن را وارد کنید.';
+                    $data['text'] = Emoji::CHARACTER_KEYCAP_7.' متن را وارد کنید.';
 
                     $result = RequestBot::sendMessage($data);
                     break;
                 }
 
                 $notes['text'] = $text;
-                $text          = '';
+                $text = '';
 
                 // No break!
             case 8:
-                if ((!in_array($message->getType(), ['document', 'photo'], true) && $text !== '@fi') || $notes['state'] == 7) {
+                if ((! in_array($message->getType(), ['document', 'photo'], true) && $text !== '@fi') || $notes['state'] == 7) {
                     $notes['state'] = 8;
                     $this->conversation->update();
 
-                    $data['text'] = Emoji::CHARACTER_LARGE_BLUE_DIAMOND . ' عکس ها را ارسال کنید.' . PHP_EOL . PHP_EOL .
-                        'فرمت ارسالی jpg, jpeg, png' . PHP_EOL .
+                    $data['text'] = Emoji::CHARACTER_LARGE_BLUE_DIAMOND.' عکس ها را ارسال کنید.'.PHP_EOL.PHP_EOL.
+                        'فرمت ارسالی jpg, jpeg, png'.PHP_EOL.
                         'هنگام اتمام کار از `@fi` استفاده کنید.';
 
                     $result = RequestBot::sendMessage($data);
                     break;
                 }
 
-                if ($text == "@fi") {
+                if ($text == '@fi') {
                     unset($notes['state']);
                     $this->conversation->stop();
-                    $data['text'] = Emoji::CHARACTER_CHECK_MARK_BUTTON . ' عملیات پایان یافت.';
+                    $data['text'] = Emoji::CHARACTER_CHECK_MARK_BUTTON.' عملیات پایان یافت.';
                     RequestBot::sendMessage($data);
                     break;
                 }
 
-                $fontDirectory = bot_upload_path() . '/' . 'fonts' . '/';
-                $font = $fontDirectory . 'vazirmatn/medium.ttf';
+                $fontDirectory = bot_upload_path().'/'.'fonts'.'/';
+                $font = $fontDirectory.'vazirmatn/medium.ttf';
                 switch ($notes['font']) {
                     case '1':
-                        $font = $fontDirectory . 'vazirmatn/medium.ttf';
+                        $font = $fontDirectory.'vazirmatn/medium.ttf';
                         break;
                     case '2':
-                        $font = $fontDirectory . 'roboto/medium.ttf';
+                        $font = $fontDirectory.'roboto/medium.ttf';
                         break;
                     case '3':
-                        $font = $fontDirectory . 'source_code_pro/medium.ttf';
+                        $font = $fontDirectory.'source_code_pro/medium.ttf';
                         break;
                     case '4':
-                        $font = $fontDirectory . 'jetbrains_mono/medium.ttf';
+                        $font = $fontDirectory.'jetbrains_mono/medium.ttf';
                         break;
                 }
 
-                $pos = "bottom-right";
+                $pos = 'bottom-right';
                 switch ($notes['pos']) {
                     case '1':
                         $pos = 'top-right';
@@ -332,25 +334,26 @@ class textimageCommand extends UserCommand
                 }
                 $message_type = $message->getType();
                 $download_path = $this->telegram->getDownloadPath();
-                $doc = $message->{'get' . ucfirst($message_type)}();
+                $doc = $message->{'get'.ucfirst($message_type)}();
                 ($message_type === 'photo') && $doc = end($doc);
                 $file_id = $doc->getFileId();
-                $file    = RequestBot::getFile(['file_id' => $file_id]);
+                $file = RequestBot::getFile(['file_id' => $file_id]);
                 if ($file->isOk() && RequestBot::downloadFile($file->getResult())) {
-                    $file_path = $download_path . '/' . $file->getResult()->getFilePath();
+                    $file_path = $download_path.'/'.$file->getResult()->getFilePath();
                     $ext = pathinfo($file_path, PATHINFO_EXTENSION);
-                    if (!in_array($ext, ['jpg', 'jpeg', 'png'], true)) {
-                        $data['text'] = Emoji::CHARACTER_RED_SQUARE . ' فرمت ارسال صحیح نمیباشد.';
+                    if (! in_array($ext, ['jpg', 'jpeg', 'png'], true)) {
+                        $data['text'] = Emoji::CHARACTER_RED_SQUARE.' فرمت ارسال صحیح نمیباشد.';
                         RequestBot::sendMessage($data);
                         $this->conversation->update();
                         $filesystem->remove($file_path);
                         break;
                     }
-                    date_default_timezone_set("Asia/Tehran");
-                    $userDirectory = bot_download_path() . '/' . $chat_id . '/' . 'textimage';
-                    if (!$filesystem->exists($userDirectory))
+                    date_default_timezone_set('Asia/Tehran');
+                    $userDirectory = bot_download_path().'/'.$chat_id.'/'.'textimage';
+                    if (! $filesystem->exists($userDirectory)) {
                         $filesystem->mkdir($userDirectory, 0777);
-                    $fileName = $userDirectory . '/' . date("Y-m-d_h:i:sa") . '.' . $ext;
+                    }
+                    $fileName = $userDirectory.'/'.date('Y-m-d_h:i:sa').'.'.$ext;
                     try {
                         $bbox = imagettfbbox($notes['size'], $notes['angle'], $font, $notes['text']);
                         $width = abs($bbox[2] - $bbox[0]) - 30;
@@ -369,20 +372,21 @@ class textimageCommand extends UserCommand
                     } catch (Exception $e) {
                         file_put_contents('errorlog', $e->getMessage());
                     }
-                    $caption = Emoji::CHARACTER_CLAMP . ' ایجاد شده توسط @alishahidinet_bot' . PHP_EOL .
-                        'تاریخ: ' . date("Y-m-d h:i:sa");
-                    if ($message_type == 'document')
+                    $caption = Emoji::CHARACTER_CLAMP.' ایجاد شده توسط @alishahidinet_bot'.PHP_EOL.
+                        'تاریخ: '.date('Y-m-d h:i:sa');
+                    if ($message_type == 'document') {
                         RequestBot::sendDocument([
                             'chat_id' => $chat_id,
                             'caption' => $caption,
-                            'document' => RequestBot::encodeFile($fileName)
+                            'document' => RequestBot::encodeFile($fileName),
                         ]);
-                    else
+                    } else {
                         RequestBot::sendPhoto([
                             'chat_id' => $chat_id,
                             'caption' => $caption,
-                            'photo' => RequestBot::encodeFile($fileName)
+                            'photo' => RequestBot::encodeFile($fileName),
                         ]);
+                    }
                     $filesystem->remove($fileName);
                     $filesystem->remove($file_path);
                 }

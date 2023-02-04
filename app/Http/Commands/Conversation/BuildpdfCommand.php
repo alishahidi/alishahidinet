@@ -32,7 +32,6 @@ use Mpdf\HTMLParserMode;
 use Mpdf\Mpdf;
 use Spatie\Emoji\Emoji;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Filesystem\Path;
 
 class BuildpdfCommand extends UserCommand
 {
@@ -77,21 +76,22 @@ class BuildpdfCommand extends UserCommand
      * Main command execution
      *
      * @return ServerResponse
+     *
      * @throws TelegramException
      */
     public function execute(): ServerResponse
     {
         $message = $this->getMessage();
 
-        $chat    = $message->getChat();
-        $user    = $message->getFrom();
-        $text    = trim($message->getText(true));
+        $chat = $message->getChat();
+        $user = $message->getFrom();
+        $text = trim($message->getText(true));
         $chat_id = $chat->getId();
         $user_id = $user->getId();
 
         // Preparing response
         $data = [
-            'chat_id'      => $chat_id,
+            'chat_id' => $chat_id,
             'parse_mode' => 'markdown',
         ];
 
@@ -105,35 +105,36 @@ class BuildpdfCommand extends UserCommand
 
         // Load any existing notes from this conversation
         $notes = &$this->conversation->notes;
-        !is_array($notes) && $notes = [];
+        ! is_array($notes) && $notes = [];
 
         // Load the current state of the conversation
         $state = $notes['state'] ?? 0;
-        if ($text == trim(HomeKeyboardCommand::KEYBOARD_BUILD_PDF))
+        if ($text == trim(HomeKeyboardCommand::KEYBOARD_BUILD_PDF)) {
             $text = '';
+        }
 
         $result = RequestBot::emptyResponse();
 
         // Send chat action "typing..."
         RequestBot::sendChatAction([
             'chat_id' => $chat_id,
-            'action'  => ChatAction::TYPING,
+            'action' => ChatAction::TYPING,
         ]);
 
         // State machine
         // Every time a step is achieved the state is updated
         switch ($state) {
             case 0:
-                if ($text === '' || !is_numeric($text)) {
+                if ($text === '' || ! is_numeric($text)) {
                     $notes['state'] = 0;
                     $this->conversation->update();
 
-                    $data['text'] = Emoji::CHARACTER_KEYCAP_0 . ' عدد نوع چیدمان را وارد کنید: ' . PHP_EOL . PHP_EOL .
-                        '*1*. rtl' . PHP_EOL .
+                    $data['text'] = Emoji::CHARACTER_KEYCAP_0.' عدد نوع چیدمان را وارد کنید: '.PHP_EOL.PHP_EOL.
+                        '*1*. rtl'.PHP_EOL.
                         '*2*. ltr';
 
                     if ($text !== '') {
-                        $data['text'] = Emoji::CHARACTER_RED_SQUARE . 'باید عدد چیدمان را وارد کنید.';
+                        $data['text'] = Emoji::CHARACTER_RED_SQUARE.'باید عدد چیدمان را وارد کنید.';
                     }
 
                     $result = RequestBot::sendMessage($data);
@@ -141,23 +142,23 @@ class BuildpdfCommand extends UserCommand
                 }
 
                 $notes['direction'] = $text;
-                $notes['text'] = "";
-                $text          = '';
+                $notes['text'] = '';
+                $text = '';
 
                 // No break!
             case 1:
-                if ($text === '' || !is_numeric($text)) {
+                if ($text === '' || ! is_numeric($text)) {
                     $notes['state'] = 1;
                     $this->conversation->update();
 
-                    $data['text'] = Emoji::CHARACTER_KEYCAP_1 . ' عدد نوع فونت وارد کنید: ' . PHP_EOL . PHP_EOL .
-                        '*1*. Vazirmatn' . PHP_EOL .
-                        '*2*. Robot' . PHP_EOL .
-                        '*3*. Source Code Pro' . PHP_EOL .
+                    $data['text'] = Emoji::CHARACTER_KEYCAP_1.' عدد نوع فونت وارد کنید: '.PHP_EOL.PHP_EOL.
+                        '*1*. Vazirmatn'.PHP_EOL.
+                        '*2*. Robot'.PHP_EOL.
+                        '*3*. Source Code Pro'.PHP_EOL.
                         '*4*. JetBrains Mono';
 
                     if ($text !== '') {
-                        $data['text'] = Emoji::CHARACTER_RED_SQUARE . 'باید عدد فونت را وارد کنید.';
+                        $data['text'] = Emoji::CHARACTER_RED_SQUARE.'باید عدد فونت را وارد کنید.';
                     }
 
                     $result = RequestBot::sendMessage($data);
@@ -165,27 +166,27 @@ class BuildpdfCommand extends UserCommand
                 }
 
                 $notes['font'] = $text;
-                $text             = '';
+                $text = '';
 
                 // No break!
             case 2:
-                if ($text === '' && !in_array($message->getType(), ['document', 'photo'], true)) {
+                if ($text === '' && ! in_array($message->getType(), ['document', 'photo'], true)) {
                     $notes['state'] = 2;
                     $this->conversation->update();
 
-                    $data['text'] = Emoji::CHARACTER_LARGE_BLUE_DIAMOND . ' متن را وارد کنید: ' . PHP_EOL . PHP_EOL .
-                        'متن را میتوانید جدا جدا ارسال کنید.' . PHP_EOL .
-                        'عکس های فرمت jpg, jpeg, png با کپشن پشتیبانی میشوند' . PHP_EOL .
-                        'emoji موقتا پشتیبانی نمیشود' . PHP_EOL .
+                    $data['text'] = Emoji::CHARACTER_LARGE_BLUE_DIAMOND.' متن را وارد کنید: '.PHP_EOL.PHP_EOL.
+                        'متن را میتوانید جدا جدا ارسال کنید.'.PHP_EOL.
+                        'عکس های فرمت jpg, jpeg, png با کپشن پشتیبانی میشوند'.PHP_EOL.
+                        'emoji موقتا پشتیبانی نمیشود'.PHP_EOL.
                         'هنگام اتمام متن از `@fi` استفاده کنید.';
 
                     $result = RequestBot::sendMessage($data);
                     break;
                 }
 
-                if ($text == "@fi") {
+                if ($text == '@fi') {
                     ini_set('max_execution_time', '300');
-                    ini_set("pcre.backtrack_limit", "5000000");
+                    ini_set('pcre.backtrack_limit', '5000000');
                     unset($notes['state']);
                     $filesystem = new Filesystem();
                     $defaultConfig = (new ConfigVariables())->getDefaults();
@@ -198,7 +199,7 @@ class BuildpdfCommand extends UserCommand
                         'setAutoTopMargin' => 'stretch',
                         'autoMarginPadding' => 10,
                         'fontDir' => array_merge($fontDirs, [
-                            bot_upload_path() . '/' . 'fonts'
+                            bot_upload_path().'/'.'fonts',
                         ]),
                         'fontdata' => $fontData + [ // lowercase letters only in font key
                             'vazirmatn' => [
@@ -225,7 +226,7 @@ class BuildpdfCommand extends UserCommand
 </table>');
                     $mpdf->autoScriptToLang = true;
                     $mpdf->autoLangToFont = true;
-                    $font = "vazirmatn";
+                    $font = 'vazirmatn';
                     switch ($notes['font']) {
                         case '1':
                             $font = 'vazirmatn';
@@ -240,50 +241,50 @@ class BuildpdfCommand extends UserCommand
                             $font = 'jetbrains_mono';
                             break;
                     }
-                    $direction = "rtl";
-                    $textAlign = "right";
+                    $direction = 'rtl';
+                    $textAlign = 'right';
                     switch ($notes['direction']) {
                         case '1':
                             $direction = 'rtl';
-                            $textAlign = "right";
+                            $textAlign = 'right';
                             $mpdf->SetDirectionality('rtl');
                             break;
                         case '2':
                             $direction = 'ltr';
-                            $textAlign = "left";
+                            $textAlign = 'left';
                             break;
                     }
-                    $css = "body{" .
-                        "direction: " . $direction . ";" .
-                        "text-align: " . $textAlign . " ;" .
-                        "font-family: " . $font . ";" .
-                        "border: 3px solid #333;" .
-                        "}";
-                    $html =  str_replace("\n", "<br />", $notes["text"]);
+                    $css = 'body{'.
+                        'direction: '.$direction.';'.
+                        'text-align: '.$textAlign.' ;'.
+                        'font-family: '.$font.';'.
+                        'border: 3px solid #333;'.
+                        '}';
+                    $html = str_replace("\n", '<br />', $notes['text']);
                     foreach (BotPhoto::where('user_id', $user_id)->get() as $photoRaw) {
-                        $fileUrlData = "data:image/" . $photoRaw->extension . ";base64," . $photoRaw->base64_data;
-                        $html = str_replace('<data:' . env('REPLACE_KEY') . ',photo:' . $photoRaw->id . '>', "<img src=" . $fileUrlData . " style=\"max-width: 80%;\" />", $html);
+                        $fileUrlData = 'data:image/'.$photoRaw->extension.';base64,'.$photoRaw->base64_data;
+                        $html = str_replace('<data:'.env('REPLACE_KEY').',photo:'.$photoRaw->id.'>', '<img src='.$fileUrlData.' style="max-width: 80%;" />', $html);
                         // $photoRaw->delete();
                     }
                     $mpdf->WriteHTML($css, HTMLParserMode::HEADER_CSS);
                     $mpdf->WriteHTML($html, HTMLParserMode::HTML_BODY);
-                    date_default_timezone_set("Asia/Tehran");
-                    $userDirectory = bot_download_path() . '/' . $chat_id . '/' . 'buildpdf';
+                    date_default_timezone_set('Asia/Tehran');
+                    $userDirectory = bot_download_path().'/'.$chat_id.'/'.'buildpdf';
 
-                    if (!$filesystem->exists($userDirectory))
+                    if (! $filesystem->exists($userDirectory)) {
                         $filesystem->mkdir($userDirectory, 0777, true);
-                    $fileName = $userDirectory . '/' . date("Y-m-d_h:i:sa") . '.pdf';
-                    $mpdf->Output($fileName, "F");
-                    $caption = 'ساخته شده توسط @alishahidinet_bot' . PHP_EOL .
-                        'تاریخ: ' . date("Y-m-d h:i:sa");
+                    }
+                    $fileName = $userDirectory.'/'.date('Y-m-d_h:i:sa').'.pdf';
+                    $mpdf->Output($fileName, 'F');
+                    $caption = 'ساخته شده توسط @alishahidinet_bot'.PHP_EOL.
+                        'تاریخ: '.date('Y-m-d h:i:sa');
 
                     RequestBot::sendDocument([
                         'chat_id' => $chat_id,
                         'caption' => $caption,
-                        'document' => RequestBot::encodeFile($fileName)
+                        'document' => RequestBot::encodeFile($fileName),
                     ]);
                     $this->conversation->stop();
-
 
                     $filesystem->remove($fileName);
                     break;
@@ -291,16 +292,16 @@ class BuildpdfCommand extends UserCommand
                 $message_type = $message->getType();
                 if (in_array($message->getType(), ['document', 'photo'], true)) {
                     $download_path = $this->telegram->getDownloadPath();
-                    $doc = $message->{'get' . ucfirst($message_type)}();
+                    $doc = $message->{'get'.ucfirst($message_type)}();
                     ($message_type === 'photo') && $doc = end($doc);
                     $file_id = $doc->getFileId();
-                    $file    = RequestBot::getFile(['file_id' => $file_id]);
+                    $file = RequestBot::getFile(['file_id' => $file_id]);
                     if ($file->isOk() && RequestBot::downloadFile($file->getResult())) {
                         $filesystem = new Filesystem();
-                        $file_path = $download_path . '/' . $file->getResult()->getFilePath();
+                        $file_path = $download_path.'/'.$file->getResult()->getFilePath();
                         $ext = pathinfo($file_path, PATHINFO_EXTENSION);
-                        if (!in_array($ext, ['jpg', 'jpeg', 'png'], true)) {
-                            $data['text'] = Emoji::CHARACTER_RED_SQUARE . ' فرمت ارسال صحیح نمیباشد.';
+                        if (! in_array($ext, ['jpg', 'jpeg', 'png'], true)) {
+                            $data['text'] = Emoji::CHARACTER_RED_SQUARE.' فرمت ارسال صحیح نمیباشد.';
                             RequestBot::sendMessage($data);
                             $this->conversation->update();
                             $filesystem->remove($file_path);
@@ -311,17 +312,17 @@ class BuildpdfCommand extends UserCommand
                         $photo->base64_data = base64_encode(file_get_contents($file_path));
                         $photo->extension = $ext;
                         $photo->save();
-                        $notes['text'] .= '<br />' . '<data:' . env('REPLACE_KEY') . ',photo:' . $photo->id . '>' . '<br/>' . $message->getCaption() . '<br />';
+                        $notes['text'] .= '<br />'.'<data:'.env('REPLACE_KEY').',photo:'.$photo->id.'>'.'<br/>'.$message->getCaption().'<br />';
                         $filesystem->remove($file_path);
                     }
                 } else {
-                    $notes['text'] .= $text . '<br/>';
+                    $notes['text'] .= $text.'<br/>';
                 }
 
                 $this->conversation->update();
                 RequestBot::sendMessage([
                     'chat_id' => $chat_id,
-                    'text' => Emoji::CHARACTER_UP_ARROW . ' آپدیت شد.'
+                    'text' => Emoji::CHARACTER_UP_ARROW.' آپدیت شد.',
                 ]);
                 break;
         }

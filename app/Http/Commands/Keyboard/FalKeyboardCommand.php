@@ -50,11 +50,12 @@ class FalKeyboardCommand extends UserCommand
      * Main command execution
      *
      * @return ServerResponse
+     *
      * @throws TelegramException
      */
+    const KEYBOARD_SHUFFLE = ' انتخاب بر هم ریخته '.Emoji::CHARACTER_COUNTERCLOCKWISE_ARROWS_BUTTON;
 
-    const KEYBOARD_SHUFFLE = ' انتخاب بر هم ریخته ' . Emoji::CHARACTER_COUNTERCLOCKWISE_ARROWS_BUTTON;
-    const KEYBOARD_NUMBER = ' انتخاب با شماره ' . Emoji::CHARACTER_COUNTERCLOCKWISE_ARROWS_BUTTON;
+    const KEYBOARD_NUMBER = ' انتخاب با شماره '.Emoji::CHARACTER_COUNTERCLOCKWISE_ARROWS_BUTTON;
 
     public function execute(): ServerResponse
     {
@@ -66,6 +67,7 @@ class FalKeyboardCommand extends UserCommand
         $keyboard = $keyboard
             ->setResizeKeyboard(true)
             ->setSelective(false);
+
         return $this->replyToChat('انتخاب گزینه: ', [
             'reply_markup' => $keyboard,
         ]);

@@ -41,19 +41,20 @@ class UserdetailsCommand extends UserCommand
      * Main command execution
      *
      * @return ServerResponse
+     *
      * @throws TelegramException
      */
     public function execute(): ServerResponse
     {
         $message = $this->getMessage();
 
-        $from       = $message->getFrom();
-        $user_id    = $from->getId();
-        $chat_id    = $message->getChat()->getId();
+        $from = $message->getFrom();
+        $user_id = $from->getId();
+        $chat_id = $message->getChat()->getId();
         $message_id = $message->getMessageId();
 
         $data = [
-            'chat_id'             => $chat_id,
+            'chat_id' => $chat_id,
             'reply_to_message_id' => $message_id,
             'parse_mode' => 'markdown',
         ];
@@ -61,7 +62,7 @@ class UserdetailsCommand extends UserCommand
         // Send chat action "typing..."
         Request::sendChatAction([
             'chat_id' => $chat_id,
-            'action'  => ChatAction::TYPING,
+            'action' => ChatAction::TYPING,
         ]);
 
         function withPre($string)
@@ -69,21 +70,21 @@ class UserdetailsCommand extends UserCommand
             return "`$string`";
         }
 
-        $caption = '*1*. ' . Emoji::CHARACTER_ID_BUTTON . ' آیدی: ' . withPre($user_id) . PHP_EOL .
-            '*2*. ' . Emoji::CHARACTER_BUST_IN_SILHOUETTE . ' نام: ' . withPre($from->getFirstName()) . PHP_EOL .
-            '*3*. ' . Emoji::CHARACTER_BUSTS_IN_SILHOUETTE . ' نام خانوادگی: ' . withPre($from->getLastName()) . PHP_EOL .
-            '*4*. ' . Emoji::CHARACTER_IDENTIFICATION_CARD . ' نام کاربری: ' . withPre($from->getUsername()) . PHP_EOL .
-            '*5*. ' . Emoji::CHARACTER_GEM_STONE . ' اکانت پرمیوم: ' . ($from->getIsPremium() ? 'دارد' : 'ندارد') . PHP_EOL .
-            '*6*. ' . Emoji::CHARACTER_BUSTS_IN_SILHOUETTE . ' کد زبانی: ' . withPre($from->getLanguageCode());
+        $caption = '*1*. '.Emoji::CHARACTER_ID_BUTTON.' آیدی: '.withPre($user_id).PHP_EOL.
+            '*2*. '.Emoji::CHARACTER_BUST_IN_SILHOUETTE.' نام: '.withPre($from->getFirstName()).PHP_EOL.
+            '*3*. '.Emoji::CHARACTER_BUSTS_IN_SILHOUETTE.' نام خانوادگی: '.withPre($from->getLastName()).PHP_EOL.
+            '*4*. '.Emoji::CHARACTER_IDENTIFICATION_CARD.' نام کاربری: '.withPre($from->getUsername()).PHP_EOL.
+            '*5*. '.Emoji::CHARACTER_GEM_STONE.' اکانت پرمیوم: '.($from->getIsPremium() ? 'دارد' : 'ندارد').PHP_EOL.
+            '*6*. '.Emoji::CHARACTER_BUSTS_IN_SILHOUETTE.' کد زبانی: '.withPre($from->getLanguageCode());
 
         // Fetch the most recent user profile photo
-        $limit  = 1;
+        $limit = 1;
         $offset = null;
 
         $user_profile_photos_response = Request::getUserProfilePhotos([
             'user_id' => $user_id,
-            'limit'   => $limit,
-            'offset'  => $offset,
+            'limit' => $limit,
+            'offset' => $offset,
         ]);
 
         if ($user_profile_photos_response->isOk()) {
@@ -94,10 +95,10 @@ class UserdetailsCommand extends UserCommand
                 $photos = $user_profile_photos->getPhotos();
 
                 // Get the best quality of the profile photo
-                $photo   = end($photos[0]);
+                $photo = end($photos[0]);
                 $file_id = $photo->getFileId();
 
-                $data['photo']   = $file_id;
+                $data['photo'] = $file_id;
                 $data['caption'] = $caption;
 
                 return Request::sendPhoto($data);

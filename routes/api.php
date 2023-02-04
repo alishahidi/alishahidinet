@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\BotController;
 use System\Router\Api\Route;
 
 Route::get('/bot/set/{token}', 'Api\BotController@set', 'api.bot.set');

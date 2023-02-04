@@ -42,6 +42,7 @@ class GenericCommand extends SystemCommand
      * Main command execution
      *
      * @return ServerResponse
+     *
      * @throws TelegramException
      */
     public function execute(): ServerResponse

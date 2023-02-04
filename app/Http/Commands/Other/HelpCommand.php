@@ -49,11 +49,12 @@ class HelpCommand extends UserCommand
      * Main command execution
      *
      * @return ServerResponse
+     *
      * @throws TelegramException
      */
     public function execute(): ServerResponse
     {
-        $message     = $this->getMessage();
+        $message = $this->getMessage();
         $command_str = trim($message->getText(true));
 
         // Admin commands shouldn't be shown in group chats
@@ -63,30 +64,30 @@ class HelpCommand extends UserCommand
 
         // If no command parameter is passed, show the list.
         if ($command_str === '' || $command_str === HomeKeyboardCommand::KEYBOARD_HELP) {
-            $text = '*لیست دستورات*: ' . PHP_EOL;
+            $text = '*لیست دستورات*: '.PHP_EOL;
             foreach ($user_commands as $user_command) {
-                $text .= '/' . $user_command->getName() . ' - ' . $user_command->getDescription() . PHP_EOL;
+                $text .= '/'.$user_command->getName().' - '.$user_command->getDescription().PHP_EOL;
             }
 
             if ($safe_to_show && count($admin_commands) > 0) {
-                $text .= PHP_EOL . '*لیست دستورات ادمین*: ' . PHP_EOL;
+                $text .= PHP_EOL.'*لیست دستورات ادمین*: '.PHP_EOL;
                 foreach ($admin_commands as $admin_command) {
-                    $text .= '/' . $admin_command->getName() . ' - ' . $admin_command->getDescription() . PHP_EOL;
+                    $text .= '/'.$admin_command->getName().' - '.$admin_command->getDescription().PHP_EOL;
                 }
             }
 
-            $text .= PHP_EOL . 'دیدن راهنمای دستور خاص: /help <دستور>';
+            $text .= PHP_EOL.'دیدن راهنمای دستور خاص: /help <دستور>';
 
             return $this->replyToChat($text, ['parse_mode' => 'markdown']);
         }
 
         $command_str = str_replace('/', '', $command_str);
-        if (isset($all_commands[$command_str]) && ($safe_to_show || !$all_commands[$command_str]->isAdminCommand())) {
+        if (isset($all_commands[$command_str]) && ($safe_to_show || ! $all_commands[$command_str]->isAdminCommand())) {
             $command = $all_commands[$command_str];
 
             return $this->replyToChat(sprintf(
-                'دستور: %s (v%s)' . PHP_EOL .
-                    'توضیحات: %s' . PHP_EOL .
+                'دستور: %s (v%s)'.PHP_EOL.
+                    'توضیحات: %s'.PHP_EOL.
                     'استفاده: %s',
                 $command->getName(),
                 $command->getVersion(),
@@ -95,13 +96,14 @@ class HelpCommand extends UserCommand
             ), ['parse_mode' => 'markdown']);
         }
 
-        return $this->replyToChat('راهنمایی موجود نیست: دستور `/' . $command_str . '` پیدا نشد', ['parse_mode' => 'markdown']);
+        return $this->replyToChat('راهنمایی موجود نیست: دستور `/'.$command_str.'` پیدا نشد', ['parse_mode' => 'markdown']);
     }
 
     /**
      * Get all available User and Admin commands to display in the help list.
      *
      * @return Command[][]
+     *
      * @throws TelegramException
      */
     protected function getUserAndAdminCommands(): array
@@ -111,7 +113,7 @@ class HelpCommand extends UserCommand
 
         // Only get enabled Admin and User commands that are allowed to be shown.
         $commands = array_filter($all_commands, function ($command): bool {
-            return !$command->isSystemCommand() && $command->showInHelp() && $command->isEnabled();
+            return ! $command->isSystemCommand() && $command->showInHelp() && $command->isEnabled();
         });
 
         // Filter out all User commands

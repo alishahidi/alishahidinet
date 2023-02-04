@@ -7,6 +7,5 @@ function errorClass($name)
 
 function errorText($name)
 {
-    return errorExists($name) ? '<div><small class="text-danger">' . error($name) . '</small></div>' : null;
+    return errorExists($name) ? '<div><small class="text-danger">'.error($name).'</small></div>' : null;
 }
-

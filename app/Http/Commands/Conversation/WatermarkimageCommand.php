@@ -73,21 +73,22 @@ class WatermarkimageCommand extends UserCommand
      * Main command execution
      *
      * @return ServerResponse
+     *
      * @throws TelegramException
      */
     public function execute(): ServerResponse
     {
         $message = $this->getMessage();
 
-        $chat    = $message->getChat();
-        $user    = $message->getFrom();
-        $text    = trim($message->getText(true));
+        $chat = $message->getChat();
+        $user = $message->getFrom();
+        $text = trim($message->getText(true));
         $chat_id = $chat->getId();
         $user_id = $user->getId();
 
         // Preparing response
         $data = [
-            'chat_id'      => $chat_id,
+            'chat_id' => $chat_id,
             // Remove any keyboard by default
             'parse_mode' => 'markdown',
         ];
@@ -102,19 +103,20 @@ class WatermarkimageCommand extends UserCommand
 
         // Load any existing notes from this conversation
         $notes = &$this->conversation->notes;
-        !is_array($notes) && $notes = [];
+        ! is_array($notes) && $notes = [];
 
         // Load the current state of the conversation
         $state = $notes['state'] ?? 0;
-        if ($text == trim(HomeKeyboardCommand::KEYBOARD_ADD_WATERMARK_TO_IMAGE))
+        if ($text == trim(HomeKeyboardCommand::KEYBOARD_ADD_WATERMARK_TO_IMAGE)) {
             $text = '';
+        }
 
         $result = RequestBot::emptyResponse();
 
         // Send chat action "typing..."
         RequestBot::sendChatAction([
             'chat_id' => $chat_id,
-            'action'  => ChatAction::TYPING,
+            'action' => ChatAction::TYPING,
         ]);
 
         $filesystem = new Filesystem();
@@ -123,14 +125,14 @@ class WatermarkimageCommand extends UserCommand
         // Every time a step is achieved the state is updated
         switch ($state) {
             case 0:
-                if ($text === '' || !is_numeric($text)) {
+                if ($text === '' || ! is_numeric($text)) {
                     $notes['state'] = 0;
                     $this->conversation->update();
 
-                    $data['text'] = Emoji::CHARACTER_KEYCAP_0 . ' طول واترمارک را وارد کنید.';
+                    $data['text'] = Emoji::CHARACTER_KEYCAP_0.' طول واترمارک را وارد کنید.';
 
                     if ($text !== '') {
-                        $data['text'] = Emoji::CHARACTER_RED_SQUARE . 'طول واترمارک را بصورت عدد وارد کنید.';
+                        $data['text'] = Emoji::CHARACTER_RED_SQUARE.'طول واترمارک را بصورت عدد وارد کنید.';
                     }
 
                     $result = RequestBot::sendMessage($data);
@@ -138,18 +140,18 @@ class WatermarkimageCommand extends UserCommand
                 }
 
                 $notes['width'] = (int) $text;
-                $text          = '';
+                $text = '';
 
                 // No break!
             case 1:
-                if ($text === '' || !is_numeric($text)) {
+                if ($text === '' || ! is_numeric($text)) {
                     $notes['state'] = 1;
                     $this->conversation->update();
 
-                    $data['text'] = Emoji::CHARACTER_KEYCAP_1 . ' عرض واترمارک را وارد کنید.';
+                    $data['text'] = Emoji::CHARACTER_KEYCAP_1.' عرض واترمارک را وارد کنید.';
 
                     if ($text !== '') {
-                        $data['text'] = Emoji::CHARACTER_RED_SQUARE . 'عرض واترمارک را بصورت عدد وارد کنید.';
+                        $data['text'] = Emoji::CHARACTER_RED_SQUARE.'عرض واترمارک را بصورت عدد وارد کنید.';
                     }
 
                     $result = RequestBot::sendMessage($data);
@@ -157,22 +159,22 @@ class WatermarkimageCommand extends UserCommand
                 }
 
                 $notes['height'] = (int) $text;
-                $text          = '';
+                $text = '';
 
                 // No break!
             case 2:
-                if ($text === '' || !is_numeric($text)) {
+                if ($text === '' || ! is_numeric($text)) {
                     $notes['state'] = 2;
                     $this->conversation->update();
 
-                    $data['text'] = Emoji::CHARACTER_KEYCAP_2 . ' عدد موقعیت واترمارک را وارد کنید:' . PHP_EOL . PHP_EOL .
-                        '*1*. top-right' . PHP_EOL .
-                        '*2*. top-left' . PHP_EOL .
-                        '*3*. bottom-right' . PHP_EOL .
+                    $data['text'] = Emoji::CHARACTER_KEYCAP_2.' عدد موقعیت واترمارک را وارد کنید:'.PHP_EOL.PHP_EOL.
+                        '*1*. top-right'.PHP_EOL.
+                        '*2*. top-left'.PHP_EOL.
+                        '*3*. bottom-right'.PHP_EOL.
                         '*4*. bottom-left';
 
                     if ($text !== '') {
-                        $data['text'] = Emoji::CHARACTER_RED_SQUARE . 'باید عدد موقعیت واترمارک را وارد کنید.';
+                        $data['text'] = Emoji::CHARACTER_RED_SQUARE.'باید عدد موقعیت واترمارک را وارد کنید.';
                     }
 
                     $result = RequestBot::sendMessage($data);
@@ -180,19 +182,19 @@ class WatermarkimageCommand extends UserCommand
                 }
 
                 $notes['pos'] = $text;
-                $text             = '';
+                $text = '';
 
                 // No break!
             case 3:
-                if ($text === '' || !is_numeric($text)) {
+                if ($text === '' || ! is_numeric($text)) {
                     $notes['state'] = 3;
                     $this->conversation->update();
 
-                    $data['text'] = Emoji::CHARACTER_KEYCAP_3 . ' مقدار x را وارد کنید' . PHP_EOL .
+                    $data['text'] = Emoji::CHARACTER_KEYCAP_3.' مقدار x را وارد کنید'.PHP_EOL.
                         'به معنی فاصله از طرفین';
 
                     if ($text !== '') {
-                        $data['text'] = Emoji::CHARACTER_RED_SQUARE . 'مقدار x را بصورت عدد وارد کنید.';
+                        $data['text'] = Emoji::CHARACTER_RED_SQUARE.'مقدار x را بصورت عدد وارد کنید.';
                     }
 
                     $result = RequestBot::sendMessage($data);
@@ -200,19 +202,19 @@ class WatermarkimageCommand extends UserCommand
                 }
 
                 $notes['x'] = (int) $text;
-                $text          = '';
+                $text = '';
 
                 // No break!
             case 4:
-                if ($text === '' || !is_numeric($text)) {
+                if ($text === '' || ! is_numeric($text)) {
                     $notes['state'] = 4;
                     $this->conversation->update();
 
-                    $data['text'] = Emoji::CHARACTER_KEYCAP_4 . ' مقدار y را وارد کنید' . PHP_EOL .
+                    $data['text'] = Emoji::CHARACTER_KEYCAP_4.' مقدار y را وارد کنید'.PHP_EOL.
                         'به معنی فاصله از طرفین';
 
                     if ($text !== '') {
-                        $data['text'] = Emoji::CHARACTER_RED_SQUARE . 'مقدار y را بصورت عدد وارد کنید.';
+                        $data['text'] = Emoji::CHARACTER_RED_SQUARE.'مقدار y را بصورت عدد وارد کنید.';
                     }
 
                     $result = RequestBot::sendMessage($data);
@@ -220,55 +222,55 @@ class WatermarkimageCommand extends UserCommand
                 }
 
                 $notes['y'] = (int) $text;
-                $text          = '';
+                $text = '';
 
                 // No break!
             case 5:
-                if (!in_array($message->getType(), ['document', 'photo'], true)) {
+                if (! in_array($message->getType(), ['document', 'photo'], true)) {
                     $notes['state'] = 5;
                     $this->conversation->update();
 
-                    $data['text'] = Emoji::CHARACTER_FRAMED_PICTURE . ' عکس واترمارک را وارد کنید. ';
+                    $data['text'] = Emoji::CHARACTER_FRAMED_PICTURE.' عکس واترمارک را وارد کنید. ';
 
                     $result = RequestBot::sendMessage($data);
                     break;
                 }
                 $message_type = $message->getType();
                 $download_path = $this->telegram->getDownloadPath();
-                $doc = $message->{'get' . ucfirst($message_type)}();
+                $doc = $message->{'get'.ucfirst($message_type)}();
                 ($message_type === 'photo') && $doc = end($doc);
                 $file_id = $doc->getFileId();
-                $file    = RequestBot::getFile(['file_id' => $file_id]);
+                $file = RequestBot::getFile(['file_id' => $file_id]);
                 if ($file->isOk() && RequestBot::downloadFile($file->getResult())) {
-                    $file_path = $download_path . '/' . $file->getResult()->getFilePath();
+                    $file_path = $download_path.'/'.$file->getResult()->getFilePath();
                     $ext = pathinfo($file_path, PATHINFO_EXTENSION);
-                    if (!in_array($ext, ['jpg', 'jpeg', 'png'], true)) {
-                        $data['text'] = Emoji::CHARACTER_RED_SQUARE . ' فرمت ارسال صحیح نمیباشد.';
+                    if (! in_array($ext, ['jpg', 'jpeg', 'png'], true)) {
+                        $data['text'] = Emoji::CHARACTER_RED_SQUARE.' فرمت ارسال صحیح نمیباشد.';
                         RequestBot::sendMessage($data);
                         $this->conversation->update();
                         $filesystem->remove($file_path);
                         break;
                     }
                     $notes['watermark'] = $file_path;
-                    $text          = '';
+                    $text = '';
                 }
 
                 // No break!
 
             case 6:
-                if ((!in_array($message->getType(), ['document', 'photo'], true) && $text !== '@fi') || $notes['state'] == 5) {
+                if ((! in_array($message->getType(), ['document', 'photo'], true) && $text !== '@fi') || $notes['state'] == 5) {
                     $notes['state'] = 6;
                     $this->conversation->update();
 
-                    $data['text'] = Emoji::CHARACTER_LARGE_BLUE_DIAMOND . ' عکس ها را ارسال کنید.' . PHP_EOL . PHP_EOL .
-                        'فرمت ارسالی jpg, jpeg, png' . PHP_EOL .
+                    $data['text'] = Emoji::CHARACTER_LARGE_BLUE_DIAMOND.' عکس ها را ارسال کنید.'.PHP_EOL.PHP_EOL.
+                        'فرمت ارسالی jpg, jpeg, png'.PHP_EOL.
                         'هنگام اتمام کار از `@fi` استفاده کنید.';
 
                     $result = RequestBot::sendMessage($data);
                     break;
                 }
 
-                if ($text == "@fi") {
+                if ($text == '@fi') {
                     unset($notes['state']);
                     $filesystem->remove($notes['watermark']);
                     $this->conversation->stop();
@@ -277,7 +279,7 @@ class WatermarkimageCommand extends UserCommand
                     break;
                 }
 
-                $pos = "bottom-right";
+                $pos = 'bottom-right';
                 switch ($notes['pos']) {
                     case '1':
                         $pos = 'top-right';
@@ -294,25 +296,26 @@ class WatermarkimageCommand extends UserCommand
                 }
                 $message_type = $message->getType();
                 $download_path = $this->telegram->getDownloadPath();
-                $doc = $message->{'get' . ucfirst($message_type)}();
+                $doc = $message->{'get'.ucfirst($message_type)}();
                 ($message_type === 'photo') && $doc = end($doc);
                 $file_id = $doc->getFileId();
-                $file    = RequestBot::getFile(['file_id' => $file_id]);
+                $file = RequestBot::getFile(['file_id' => $file_id]);
                 if ($file->isOk() && RequestBot::downloadFile($file->getResult())) {
-                    $file_path = $download_path . '/' . $file->getResult()->getFilePath();
+                    $file_path = $download_path.'/'.$file->getResult()->getFilePath();
                     $ext = pathinfo($file_path, PATHINFO_EXTENSION);
-                    if (!in_array($ext, ['jpg', 'jpeg', 'png'], true)) {
-                        $data['text'] = Emoji::CHARACTER_RED_SQUARE . ' فرمت ارسال صحیح نمیباشد.';
+                    if (! in_array($ext, ['jpg', 'jpeg', 'png'], true)) {
+                        $data['text'] = Emoji::CHARACTER_RED_SQUARE.' فرمت ارسال صحیح نمیباشد.';
                         RequestBot::sendMessage($data);
                         $this->conversation->update();
                         $filesystem->remove($file_path);
                         break;
                     }
-                    date_default_timezone_set("Asia/Tehran");
-                    $userDirectory = bot_download_path() . '/' . $chat_id . '/' . 'watermarkimage';
-                    if (!$filesystem->exists($userDirectory))
+                    date_default_timezone_set('Asia/Tehran');
+                    $userDirectory = bot_download_path().'/'.$chat_id.'/'.'watermarkimage';
+                    if (! $filesystem->exists($userDirectory)) {
                         $filesystem->mkdir($userDirectory, 0777);
-                    $fileName = $userDirectory . '/' . date("Y-m-d_h:i:sa") . '.' . $ext;
+                    }
+                    $fileName = $userDirectory.'/'.date('Y-m-d_h:i:sa').'.'.$ext;
                     try {
                         Image::configure(['driver' => 'gd']);
                         $watermark = Image::make($notes['watermark']);
@@ -322,20 +325,21 @@ class WatermarkimageCommand extends UserCommand
                     } catch (Exception $e) {
                         file_put_contents('errorlog', $e->getMessage());
                     }
-                    $caption = Emoji::CHARACTER_CLAMP . ' ایجاد شده توسط @alishahidinet_bot' . PHP_EOL .
-                        'تاریخ: ' . date("Y-m-d h:i:sa");
-                    if ($message_type == 'document')
+                    $caption = Emoji::CHARACTER_CLAMP.' ایجاد شده توسط @alishahidinet_bot'.PHP_EOL.
+                        'تاریخ: '.date('Y-m-d h:i:sa');
+                    if ($message_type == 'document') {
                         RequestBot::sendDocument([
                             'chat_id' => $chat_id,
                             'caption' => $caption,
-                            'document' => RequestBot::encodeFile($fileName)
+                            'document' => RequestBot::encodeFile($fileName),
                         ]);
-                    else
+                    } else {
                         RequestBot::sendPhoto([
                             'chat_id' => $chat_id,
                             'caption' => $caption,
-                            'photo' => RequestBot::encodeFile($fileName)
+                            'photo' => RequestBot::encodeFile($fileName),
                         ]);
+                    }
                     $filesystem->remove($fileName);
                     $filesystem->remove($file_path);
                 }
