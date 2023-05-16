@@ -73,6 +73,44 @@
   background: var(--accent);
 }
 
+.experience-card {
+  background: var(--background-tertiary);
+  padding: 25px;
+  margin-bottom: 1rem;
+  box-shadow: 0 10px 10px hsla(0, 0%, 0%, 0.05);
+  transition: 0.25s ease;
+}
+
+.experience-text {
+  color: var(--foreground-tertiary);
+  font-family: "Vazirmatn", sans-serif;
+  font-weight: 500;
+  font-size: 1.03rem;
+}
+
+.experience-title h3 {
+  font-size: 0.9rem;
+  font-family: "Vazirmatn", sans-serif;
+  font-weight: 700;
+}
+
+.experience-title span {
+  color: var(--foreground-secondary);
+}
+
+.experience-progress .progress {
+  height: 8px;
+  background: var(--background-primary);
+}
+
+.experience-progress .progress {
+  background: var(--nord5);
+}
+
+.experience-progress .progress-bar {
+  background: var(--accent);
+}
+
 .summary-card {
   background: var(--background-tertiary);
   padding: 30px;

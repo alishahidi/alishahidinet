@@ -8,6 +8,7 @@ use App\Http\Services\Rss;
 use App\Http\Services\Url;
 use App\Models\Article;
 use App\Models\Comment;
+use App\Models\Experience;
 use App\Models\Project;
 use App\Models\Service;
 use App\Models\Skill;
@@ -40,10 +41,11 @@ class HomeController extends Controller
     {
         $services = Service::orderBy('created_at', 'DESC')->get();
         $skills = Skill::orderBy('created_at', 'DESC')->get();
+        $experiences = Experience::orderBy('created_at', 'DESC')->get();
         $projects = Project::orderBy('created_at', 'DESC')->get();
         $articlesCount = Article::count();
 
-        return view('app.about', compact('services', 'skills', 'projects', 'articlesCount'));
+        return view('app.about', compact('services', 'skills', 'experiences', 'projects', 'articlesCount'));
     }
 
     public function allArticle()
@@ -58,7 +60,7 @@ class HomeController extends Controller
     public function article($id, $slug)
     {
         $article = Article::find($id);
-        if (! $article) {
+        if (!$article) {
             return error_404();
         }
         $relatedArticles = Article::where('topic_id', $article->topic_id)->orderBy('created_at', 'DESC')->limit(0, 3)->get();
@@ -83,7 +85,7 @@ class HomeController extends Controller
     public function topic($id, $slug)
     {
         $topic = Topic::find($id);
-        if (! $topic) {
+        if (!$topic) {
             return error_404();
         }
         $articles = $topic->articles()->orderBy('created_at', 'DESC')->paginate(5);
@@ -96,7 +98,7 @@ class HomeController extends Controller
     public function tag($id, $slug)
     {
         $tag = Tag::find($id);
-        if (! $tag) {
+        if (!$tag) {
             return error_404();
         }
         $articles = $tag->articles()->orderBy('created_at', 'DESC')->paginate(5);

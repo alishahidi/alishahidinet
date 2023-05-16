@@ -37,8 +37,8 @@
                             <p>گیت هاب: <b><a href="https://github.com/alishahidi">لینک</a></b></p>
                         </div>
                     </div>
-                    <a href="#" class="custom-btn custom-btn-primary text-center mt-4 w-100 rounded-0">دانلود
-                        CV (work soon)</a>
+                    <a href="<?= asset('assets/app/resume.pdf') ?>" target="_blank" class="custom-btn custom-btn-primary text-center mt-4 w-100 rounded-0">دانلود
+                        CV</a>
                 </div>
             </div>
             <div class="skill mt-5 mb-4">
@@ -59,6 +59,30 @@
                                 </div>
                             </div>
                         <?php } ?>
+                    </div>
+                </div>
+            </div>
+            <div class="experience mt-5 mb-4">
+                <h2 class="title h2 text-center">تجربه های من</h2>
+                <div class="experience-card">
+                    <p class="mt-4 experience-text">لیست تجربه های حضوری یا فریلنسری من.</p>
+                    <div class="row skill-details mt-4">
+                        <?php $i = 1;
+                        foreach ($experiences as $experience) { ?>
+                            <div class="col-12 mt-2 experience-item mb-4">
+                                <h2 class="h2"><?= $i ?>.</h2>
+                                <div class="me-3">
+                                    <div class="experience-title d-flex gap-3 mb-2">
+                                        <h2 class="h2"><?= e($experience->name) ?></h2>
+                                        <span><?= e($experience->start) ?> <?= $experience->end ? "- " . $experience->end : "" ?> </span>
+                                    </div>
+                                    <div class="experience-title d-flex gap-3 mb-2">
+                                        <h4 class="h4"><?= e($experience->location) ?>, <?= e($experience->position) ?></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php $i++;
+                        } ?>
                     </div>
                 </div>
             </div>

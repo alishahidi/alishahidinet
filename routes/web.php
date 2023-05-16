@@ -91,6 +91,15 @@ Route::get('/admin/skill/edit/{id}', "Admin\SkillController@edit", 'admin.skill.
 Route::put('/admin/skill/update/{id}', "Admin\SkillController@update", 'admin.skill.update');
 Route::delete('/admin/skill/delete/{id}', "Admin\SkillController@destroy", 'admin.skill.delete');
 
+// Experience Routes
+Route::get('/admin/experience', "Admin\ExperienceController@index", 'admin.experience.index');
+Route::get('/admin/experience/create', "Admin\ExperienceController@create", 'admin.experience.create');
+Route::post('/admin/experience/store', "Admin\ExperienceController@store", 'admin.experience.store');
+Route::get('/admin/experience/edit/{id}', "Admin\ExperienceController@edit", 'admin.experience.edit');
+Route::put('/admin/experience/update/{id}', "Admin\ExperienceController@update", 'admin.experience.update');
+Route::delete('/admin/experience/delete/{id}', "Admin\ExperienceController@destroy", 'admin.experience.delete');
+
+
 // Project Routes
 Route::get('/admin/project', "Admin\ProjectController@index", 'admin.project.index');
 Route::get('/admin/project/create', "Admin\ProjectController@create", 'admin.project.create');

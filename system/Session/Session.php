@@ -9,16 +9,16 @@ class Session extends stdClass
 {
     public static function set($name, $valueArray)
     {
-        $_SESSION[$name] = Security::encrypt(Security::jwtEncode($valueArray));
+        $_SESSION[$name] = Security::jwtEncode($valueArray);
     }
 
     public static function get($name)
     {
-        if (! isset($_SESSION[$name])) {
+        if (!isset($_SESSION[$name])) {
             return false;
         }
         $token = $_SESSION[$name];
-        $payload = Security::jwtDecode(Security::decrypt($token));
+        $payload = Security::jwtDecode($token);
         if ($payload) {
             return $payload;
         }

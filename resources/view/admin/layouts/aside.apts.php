@@ -54,6 +54,12 @@
                 </a>
             </li>
             <li>
+                <a href="<?= route('admin.experience.index') ?>">
+                    <ion-icon name="code-outline"></ion-icon>
+                    <span class="link-name">تجربه ها</span>
+                </a>
+            </li>
+            <li>
                 <a href="<?= route('admin.project.index') ?>">
                     <ion-icon name="code-slash-outline"></ion-icon>
                     <span class="link-name">پروژه ها</span>

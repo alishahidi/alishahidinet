@@ -1,14 +1,14 @@
 :root {
   --white: #ffffff;
-  --background-primary: #1c1c1e;
-  --background-secondary: #2f2f31;
-  --background-tertiary: #3b3b3e;
-  --action-primary: #3e3e3e;
-  --action-secondary: #333;
-  --foreground-primary: #f2f2f2;
-  --foreground-secondary: #d9d9d9;
-  --foreground-tertiary: #b3b3b3;
-  --accent: #c4980e;
+  --background-primary: #f8f9fa;
+  --background-secondary: #e9ecef;
+  --background-tertiary: #dee2e6;
+  --action-primary: #ced4da;
+  --action-secondary: #adb5bd;
+  --foreground-primary: #212529;
+  --foreground-secondary: #343a40;
+  --foreground-tertiary: #495057;
+  --accent: #268bd2;
 
   --fs-base: 0.85rem;
   --fs-1: 1.875rem;
@@ -391,7 +391,6 @@ nav .navbar-brand {
 .hero .img-box {
   position: relative;
   z-index: 2;
-  overflow: hidden;
 }
 
 .hero-img {
@@ -750,14 +749,6 @@ footer .footer-bottom p a {
 
   .hero .row {
     flex-direction: row;
-  }
-
-  .hero .img-box {
-    transform: rotate(-24deg);
-  }
-
-  .hero-img {
-    transform: rotate(16deg);
   }
 
   .theme-btn-desktop {

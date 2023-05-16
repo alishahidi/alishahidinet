@@ -33,9 +33,7 @@
             <div class="right col-lg-6 d-lg-flex">
                 <div class="pattern-bg">
                     <div class="img-box">
-                        <img src="<?= asset('assets/app/images/hero.png') ?>" alt="Profile" class="hero-img">
-                        <div class="shape shape-1"></div>
-                        <div class="shape shape-2"></div>
+                        <img src="<?= asset('assets/app/images/hero.jpg') ?>" alt="Profile" class="hero-img">
                     </div>
                 </div>
             </div>

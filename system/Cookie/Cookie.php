@@ -10,9 +10,9 @@ class Cookie extends stdClass
     public static function set($name, $valueArray, $time, $isSubDomain = false)
     {
         if ($isSubDomain) {
-            setcookie($name, Security::encrypt(Security::jwtEncode($valueArray)), time() + $time, '/', '.'.str_replace('www.', '', currentDomain()));
+            setcookie($name, Security::jwtEncode($valueArray), time() + $time, '/', '.' . str_replace('www.', '', currentDomain()));
         } else {
-            setcookie($name, Security::encrypt(Security::jwtEncode($valueArray)), time() + $time, '/');
+            setcookie($name, Security::jwtEncode($valueArray), time() + $time, '/');
         }
 
         return true;
@@ -20,11 +20,11 @@ class Cookie extends stdClass
 
     public static function get($name)
     {
-        if (! isset($_COOKIE[$name])) {
+        if (!isset($_COOKIE[$name])) {
             return false;
         }
         $token = $_COOKIE[$name];
-        $payload = Security::jwtDecode(Security::decrypt($token));
+        $payload = Security::jwtDecode($token);
         if ($payload) {
             return $payload;
         }

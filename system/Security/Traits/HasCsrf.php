@@ -10,7 +10,6 @@ trait HasCsrf
     {
         $token = self::generateUserAgentToken();
         Session::set('_csrf', ['token' => $token]);
-
         return true;
     }
 
